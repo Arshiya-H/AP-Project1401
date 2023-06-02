@@ -4,35 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_xml_bind_api_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AP-Project1401.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jakarta.xml.bind-api-3.0.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-checker-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-codegen-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-codegen-maven-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-jackson-extensions-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-kotlin-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-kotlin-coroutines-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-meta-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-meta-extensions-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-meta-extensions-hibernate-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-meta-extensions-liquibase-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-postgres-extensions-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-scala_2.13-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/jooq-xtend-3.18.4.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/r2dbc-spi-1.0.0.RELEASE.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/reactive-streams-1.0.3.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/libraries/sqlite-jdbc-3.41.2.2.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/DataBase/DBConnection.java" afterDir="false" />
-    </list>
+    <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,11 +55,22 @@
       <option name="presentableId" value="Default" />
       <updated>1685636378137</updated>
       <workItem from="1685636379414" duration="1212000" />
-      <workItem from="1685682999212" duration="2582000" />
+      <workItem from="1685682999212" duration="2912000" />
     </task>
+    <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
+      <created>1685698643843</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۱" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۱" />
+      <updated>1685698643843</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
   </component>
 </project>
