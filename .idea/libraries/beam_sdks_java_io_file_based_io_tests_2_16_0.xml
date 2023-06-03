@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="beam-sdks-java-io-file-based-io-tests-2.16.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libraries/beam-sdks-java-io-file-based-io-tests-2.16.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="jar://$PROJECT_DIR$/libraries/beam-sdks-java-io-file-based-io-tests-2.16.0.jar!/" recursive="false" />
+  </library>
+</component>
