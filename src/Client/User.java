@@ -1,9 +1,9 @@
 package Client;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 
-public class user {
+public class User {
 
     private String UserName;
     private String FirstName;
@@ -13,7 +13,7 @@ public class user {
     private String Password;
     private String Country;
     private String BirthDate;
-    private LocalDateTime InComeDate;
+    private String InComeDate;
     private LocalDateTime LastChangeDate;
     private String Bio;
     private String Location;
@@ -21,15 +21,15 @@ public class user {
     private String JWT;
 
 
-    public user(String userName, String firstName, String lastName, String password, String country, String birthDate, String PhoneOrEmail, String StringPhoneOrEmail) {
+    public User(String userName, String firstName, String lastName, String password, String country, String birthDate, String PhoneOrEmail, String StringPhoneOrEmail) {
         UserName = userName;
         FirstName = firstName;
         LastName = lastName;
         Country = country;
         Password = password;
         BirthDate = birthDate;
-        InComeDate = LocalDateTime.now();
-        LastChangeDate = InComeDate;
+        InComeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY/MM/DD"));
+        LastChangeDate = LocalDateTime.now();
         if (PhoneOrEmail.equals("1")) setEmail(StringPhoneOrEmail);
         if (PhoneOrEmail.equals("2")) setPhoneNumber(StringPhoneOrEmail);
     }
