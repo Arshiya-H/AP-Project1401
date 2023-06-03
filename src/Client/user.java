@@ -12,15 +12,16 @@ public class user {
     private String PhoneNumber;
     private String Password;
     private String Country;
-    private java.util.Date BirthDate;
+    private String BirthDate;
     private LocalDateTime InComeDate;
     private LocalDateTime LastChangeDate;
     private String Bio;
     private String Location;
     private String WebAddress;
+    private String JWT;
 
 
-    public user(String userName, String firstName, String lastName, String password, String country, Date birthDate, String PhoneOrEmail, String StringPhoneOrEmail) {
+    public user(String userName, String firstName, String lastName, String password, String country, String birthDate, String PhoneOrEmail, String StringPhoneOrEmail) {
         UserName = userName;
         FirstName = firstName;
         LastName = lastName;
@@ -29,8 +30,12 @@ public class user {
         BirthDate = birthDate;
         InComeDate = LocalDateTime.now();
         LastChangeDate = InComeDate;
-        if (PhoneOrEmail.equals("Email")) setEmail(StringPhoneOrEmail);
-        if (PhoneOrEmail.equals("Phone")) setPhoneNumber(StringPhoneOrEmail);
+        if (PhoneOrEmail.equals("1")) setEmail(StringPhoneOrEmail);
+        if (PhoneOrEmail.equals("2")) setPhoneNumber(StringPhoneOrEmail);
+    }
+
+    public void setJWT(String JWT) {
+        this.JWT = JWT;
     }
 
     public void setCountry(String country) {
