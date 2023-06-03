@@ -4,45 +4,45 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class MethodUser {
-    public void SetPhoneNumber(user user, String StringPhoneOrEmail) {
-        user.setPhoneNumber(StringPhoneOrEmail);
+    public void SetPhoneNumber(User User, String StringPhoneOrEmail) {
+        User.setPhoneNumber(StringPhoneOrEmail);
     }
 
-    public void SetEmail(user user, String StringPhoneOrEmail) {
-        user.setEmail(StringPhoneOrEmail);
+    public void SetEmail(User User, String StringPhoneOrEmail) {
+        User.setEmail(StringPhoneOrEmail);
     }
 
-    public void SetDate(user user, LocalDateTime Date) {
-        user.setLastChangeDate(Date);
-    }
-
-
-    public void SetBio(user user, String Bio) {
-        user.setBio(Bio);
-    }
-
-    public void SetLocation(user user, String Location) {
-        user.setLocation(Location);
-    }
-
-    public void SetWebAddress(user user, String WebAddress) {
-        user.setWebAddress(WebAddress);
+    public void SetDate(User User, LocalDateTime Date) {
+        User.setLastChangeDate(Date);
     }
 
 
-    public void SetDescription(user user, String Bio) {
-        SetBio(user, Bio);
+    public void SetBio(User User, String Bio) {
+        User.setBio(Bio);
     }
 
-    public void SetDescription(user user, String Bio, String Location) {
-        SetBio(user, Bio);
-        SetLocation(user, Location);
+    public void SetLocation(User User, String Location) {
+        User.setLocation(Location);
     }
 
-    public void SetDescription(user user, String Bio, String Location, String WebAddress) {
-        SetBio(user, Bio);
-        SetLocation(user, Location);
-        SetWebAddress(user, WebAddress);
+    public void SetWebAddress(User User, String WebAddress) {
+        User.setWebAddress(WebAddress);
+    }
+
+
+    public void SetDescription(User User, String Bio) {
+        SetBio(User, Bio);
+    }
+
+    public void SetDescription(User User, String Bio, String Location) {
+        SetBio(User, Bio);
+        SetLocation(User, Location);
+    }
+
+    public void SetDescription(User User, String Bio, String Location, String WebAddress) {
+        SetBio(User, Bio);
+        SetLocation(User, Location);
+        SetWebAddress(User, WebAddress);
     }
 
 
