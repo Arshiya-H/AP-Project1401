@@ -28,7 +28,7 @@ public class User {
         Country = country;
         Password = password;
         BirthDate = birthDate;
-        InComeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY/MM/DD"));
+        InComeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         LastChangeDate = LocalDateTime.now();
         if (PhoneOrEmail.equals("1") || PhoneOrEmail.equals("3")) setEmail(email);
         if (PhoneOrEmail.equals("2") || PhoneOrEmail.equals("3")) setPhoneNumber(phoneNumber);
