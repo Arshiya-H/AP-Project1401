@@ -21,7 +21,7 @@ public class User {
     private String JWT;
 
 
-    public User(String userName, String firstName, String lastName, String password, String country, String birthDate, String PhoneOrEmail, String StringPhoneOrEmail) {
+    public User(String userName, String firstName, String lastName, String password, String country, String birthDate, String PhoneOrEmail, String phoneNumber, String email) {
         UserName = userName;
         FirstName = firstName;
         LastName = lastName;
@@ -30,9 +30,10 @@ public class User {
         BirthDate = birthDate;
         InComeDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY/MM/DD"));
         LastChangeDate = LocalDateTime.now();
-        if (PhoneOrEmail.equals("1")) setEmail(StringPhoneOrEmail);
-        if (PhoneOrEmail.equals("2")) setPhoneNumber(StringPhoneOrEmail);
+        if (PhoneOrEmail.equals("1") || PhoneOrEmail.equals("3")) setEmail(email);
+        if (PhoneOrEmail.equals("2") || PhoneOrEmail.equals("3")) setPhoneNumber(phoneNumber);
     }
+
 
     public void setJWT(String JWT) {
         this.JWT = JWT;
