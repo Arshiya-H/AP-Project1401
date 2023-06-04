@@ -2,21 +2,21 @@ package ENTER;
 
 import Client.User;
 import DataBase.DBConnection;
+import DataBase.DBManager;
 import org.jooq.DSLContext;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-public class Enter_managment {
+public class UserController {
 
     public static void singUp() {
-        DBConnection dbConnection = new DBConnection();
-        DSLContext DB = dbConnection.getDB();
-
+        String username = null;
         Scanner scan = new Scanner(System.in);
+
         System.out.println("enter a user name :");
-        String username = scan.nextLine();
-        /////// check username unique .
+        do username = scan.nextLine();
+        while (DBManager.checkUserName(username));
 
         System.out.println("enter your first name :");
         String firstname = scan.nextLine();
@@ -31,19 +31,14 @@ public class Enter_managment {
 
         if (choicePhoneOrEmail.equals("2") || choicePhoneOrEmail.equals("3")) {
             System.out.println("enter your phone number :");
-            do {
-                if (phone != null) System.out.println("enter a correct phone number :");
-                phone = scan.nextLine();
-            } while (!checkPhoneNumber(phone));
-            ///check side server or duplicate
+            do phone = scan.nextLine();
+            while (!checkPhoneNumber(phone) || DBManager.checkPhoneNumber(phone));
+
         }
         if (choicePhoneOrEmail.equals("1") || choicePhoneOrEmail.equals("3")) {
             System.out.println("enter your email :");
-            do {
-                if (email != null) System.out.println("enter a correct email :");
-                email = scan.nextLine();
-            } while (!isValidEmail(email));
-            ///check side server or duplicate
+            do email = scan.nextLine();
+            while (!isValidEmail(email) || DBManager.checkEmail(email));
         }
 
         String pass = null;
@@ -94,12 +89,20 @@ public class Enter_managment {
         for (int i = 0; i < phoneNumber.length(); i++) {
             try {
                 int integer = Integer.parseInt(n[i]);
-                if (!(integer >= 0 && integer <= 9)) return false;
+                if (!(integer >= 0 && integer <= 9)) {
+                    System.out.println("invalid phone number, write again :");
+                    return false;
+                }
             } catch (Exception e) {
+                System.out.println("invalid phone number, write again :");
                 return false;
             }
         }
-        return phoneNumber.length() == 11;
+        if (phoneNumber.length() != 11) {
+            System.out.println("invalid phone number, write again :");
+            return false;
+        }
+        return true;
     }
 
     public static boolean isValidEmail(String email) {
