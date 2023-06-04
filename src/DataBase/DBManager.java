@@ -110,6 +110,7 @@ public class DBManager {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
 
+        
         DB.insertInto(table("Users")).values(userName,firstName,lastName,email,phoneNumber,password,country,birthDate,inComeDate,lastChangeDate
                 ,bio,location,webAddress,JWT).execute();
 
