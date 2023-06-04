@@ -1,5 +1,7 @@
 package Server;
 
+import DataBase.DBManager;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -13,6 +15,7 @@ public class Server {
     }
 
     public static void main(String[] args) throws IOException {
+        DBManager.creatUsersTable();
         ServerSocket ServerSocket = new ServerSocket(2000);
         Server Server = new Server(ServerSocket);
         try {
