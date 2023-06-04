@@ -21,7 +21,8 @@ public class Server {
         try {
             while (true) {
                 Socket socket = ServerSocket.accept();
-                Thread thread = new Thread((Runnable) new ConnectionApp(socket));
+                ConnectionApp app = new ConnectionApp(socket);
+                Thread thread = new Thread(app);
                 thread.start();
             }
         } catch (IOException e) {
@@ -29,5 +30,4 @@ public class Server {
         }
 
     }
-
 }

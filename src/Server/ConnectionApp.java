@@ -2,7 +2,7 @@ package Server;
 
 import java.net.Socket;
 
-public class ConnectionApp {
+public class ConnectionApp implements Runnable {
 
     Socket socket;
     private String JWT;
@@ -11,4 +11,9 @@ public class ConnectionApp {
         this.socket = socket;
     }
 
+
+    @Override
+    public void run() {
+
+    }
 }

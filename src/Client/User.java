@@ -15,6 +15,7 @@ public class User {
     private String BirthDate;
     private String InComeDate;
     private LocalDateTime LastChangeDate;
+
     private String Bio;
     private String Location;
     private String WebAddress;

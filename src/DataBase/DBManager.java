@@ -1,6 +1,7 @@
 package DataBase;
 
 import org.jooq.DSLContext;
+import org.jooq.Record;
 
 import java.sql.SQLException;
 
@@ -34,6 +35,7 @@ public class DBManager {
                 .column("location", VARCHAR(255))
                 .column("webAddress", VARCHAR(255))
                 .column("JWT", VARCHAR(255))
+                .column("secretKey", VARCHAR(255))
                 .execute();
         try {
             dbConnection.getConnection().close();
@@ -62,7 +64,6 @@ public class DBManager {
             e.printStackTrace();
         }
         if (usernameExists) {
-            System.out.println("the username has existed already, choose another :");
             return true;
         }
         return false;
@@ -120,6 +121,26 @@ public class DBManager {
         return false;
     }
 
+    public static boolean checkSecurityKay(String secretKey) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        boolean usernameExists = DB.fetchExists(
+                DB.selectOne()
+                        .from("Users")
+                        .where("secretKey = ?", secretKey));
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (usernameExists) {
+            return true;
+        }
+        return false;
+    }
+
     // Insert Date:
     public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
             , String country, String birthDate, String inComeDate, String lastChangeDate) {
@@ -137,5 +158,44 @@ public class DBManager {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void updateSecretKeyAndJWT(String userName, String secretKey, String jwt) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        DB.update(table("Users"))
+                .set(field("secretKey"), secretKey)
+                .set(field("JWT"), jwt)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static boolean checkPass(String userName, String pass) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        Record record = DB.select(field("password"))
+                .from(table("Users"))
+                .where(field("userName").eq(userName))
+                .fetchOne();
+
+        String password = null;
+        if (record != null) password = record.getValue(field("password"), String.class);
+
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (pass.equals(password)) {
+            return true;
+        }
+        return false;
     }
 }
