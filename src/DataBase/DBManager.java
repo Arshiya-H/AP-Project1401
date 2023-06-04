@@ -119,4 +119,21 @@ public class DBManager {
         }
         return false;
     }
+    // Insert Date:
+    public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
+            , String country, String birthDate, String inComeDate, String lastChangeDate, String bio, String location, String webAddress, String JWT){
+
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+
+        DB.insertInto(table("Users")).values(userName,firstName,lastName,email,phoneNumber,password,country,birthDate,inComeDate,lastChangeDate
+                ,bio,location,webAddress,JWT).execute();
+
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
