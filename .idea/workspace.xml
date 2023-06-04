@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataBase/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBase/DBManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,7 +72,7 @@
       <workItem from="1685775745038" duration="3317000" />
       <workItem from="1685779605364" duration="6618000" />
       <workItem from="1685792380190" duration="10115000" />
-      <workItem from="1685860279820" duration="3546000" />
+      <workItem from="1685860279820" duration="3838000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -95,7 +92,13 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
       <updated>1685866896856</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎−۰۰۰۰۴" summary="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.A method to add user's data to table">
+      <created>1685876915774</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۴" />
+      <updated>1685876915774</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,7 +115,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Client" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -129,6 +132,7 @@
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
     <MESSAGE value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.creat &quot;Users&quot; table&#10;2.checking if &quot;userName&quot;, &quot;phoneNumber&quot; and &quot;email&quot; are unique or not" />
-    <option name="LAST_COMMIT_MESSAGE" value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.creat &quot;Users&quot; table&#10;2.checking if &quot;userName&quot;, &quot;phoneNumber&quot; and &quot;email&quot; are unique or not" />
+    <MESSAGE value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.A method to add user's data to table" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.A method to add user's data to table" />
   </component>
 </project>

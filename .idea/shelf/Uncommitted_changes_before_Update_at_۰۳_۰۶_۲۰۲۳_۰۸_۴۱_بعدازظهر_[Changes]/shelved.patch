@@ -1,0 +1,128 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"56721086-d08a-4a12-84d4-f37a3d8fde92\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/DataBase/DBConnection.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/DataBase/DBConnection.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Qby3f1awHDCuNS7N4Wn0WIYEwX\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19 (2)&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Desktop/Codes/AUT/Java/AP - Project/AP-Project1401/libraries/r2dbc-spi-1.0.0.RELEASE.jar&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;\r\n  }\r\n}</component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"56721086-d08a-4a12-84d4-f37a3d8fde92\" name=\"Changes\" comment=\"\" />\r\n      <created>1685636378137</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1685636378137</updated>\r\n      <workItem from=\"1685636379414\" duration=\"1212000\" />\r\n      <workItem from=\"1685682999212\" duration=\"3484000\" />\r\n      <workItem from=\"1685769553561\" duration=\"24000\" />\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۱\" summary=\"Initial commit:&#10;Add &quot;DBConnection&quot; class.\">\r\n      <created>1685698643843</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۱\" />\r\n      <updated>1685698643843</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E−۰۰۰۰۲\" summary=\"Creat &quot;DBManager&quot; class.\">\r\n      <created>1685699095114</created>\r\n      <option name=\"number\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E−۰۰۰۰۲\" />\r\n      <updated>1685699095114</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Initial commit:&#10;Add &quot;DBConnection&quot; class.\" />\r\n    <MESSAGE value=\"Creat &quot;DBManager&quot; class.\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Creat &quot;DBManager&quot; class.\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d1000675f892d1372d238075b4cb83a93d063b16)
++++ b/.idea/workspace.xml	(date 1685808150114)
+@@ -6,7 +6,6 @@
+   <component name="ChangeListManager">
+     <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/DataBase/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBase/DBConnection.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -21,6 +20,11 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="Client" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+@@ -32,23 +36,23 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19 (2)&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Desktop/Codes/AUT/Java/AP - Project/AP-Project1401/libraries/r2dbc-spi-1.0.0.RELEASE.jar&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "jdk.selected.JAVA_MODULE": "openjdk-19 (2)",
++    "last_opened_file_path": "C:/Users/USER/Desktop/Codes/AUT/Java/AP - Project/AP-Project1401/libraries/r2dbc-spi-1.0.0.RELEASE.jar",
++    "node.js.detected.package.eslint": "true",
++    "node.js.detected.package.tslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "project.structure.last.edited": "Libraries",
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2"
+   }
+-}</component>
++}]]></component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -60,6 +64,8 @@
+       <workItem from="1685636379414" duration="1212000" />
+       <workItem from="1685682999212" duration="3484000" />
+       <workItem from="1685769553561" duration="24000" />
++      <workItem from="1685770229771" duration="383000" />
++      <workItem from="1685774846837" duration="11959000" />
+     </task>
+     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
+       <created>1685698643843</created>
+@@ -73,15 +79,45 @@
+       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
+       <updated>1685699095114</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL‎−۰۰۰۰۳" summary="&quot;DBConnection&quot;'s structure changed.">
++      <created>1685770418815</created>
++      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
++      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
++      <updated>1685770418815</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
+   </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State>
++              <option name="FILTERS">
++                <map>
++                  <entry key="branch">
++                    <value>
++                      <list>
++                        <option value="origin/Client" />
++                      </list>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
+     <MESSAGE value="Creat &quot;DBManager&quot; class." />
+-    <option name="LAST_COMMIT_MESSAGE" value="Creat &quot;DBManager&quot; class." />
++    <MESSAGE value="&quot;DBConnection&quot;'s structure changed." />
++    <option name="LAST_COMMIT_MESSAGE" value="&quot;DBConnection&quot;'s structure changed." />
+   </component>
+ </project>
+\ No newline at end of file
