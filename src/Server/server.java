@@ -1,24 +1,23 @@
-package server;
+package Server;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class server {
+public class Server {
 
-    private ServerSocket serverSocket;
+    private ServerSocket ServerSocket;
 
-    public server(ServerSocket serverSocket) {
-        this.serverSocket = serverSocket;
+    public Server(ServerSocket ServerSocket) {
+        this.ServerSocket = ServerSocket;
     }
 
     public static void main(String[] args) throws IOException {
-        ServerSocket serverSocket = new ServerSocket(2000);
-        server server = new server(serverSocket);
+        ServerSocket ServerSocket = new ServerSocket(2000);
+        Server Server = new Server(ServerSocket);
         try {
             while (true) {
-                Socket socket = serverSocket.accept();
+                Socket socket = ServerSocket.accept();
                 Thread thread = new Thread((Runnable) new ConnectionApp(socket));
                 thread.start();
             }

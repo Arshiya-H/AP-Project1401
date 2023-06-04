@@ -1,9 +1,7 @@
-package ENTER;
+package UserApplicationSrarter;
 
 import Client.User;
-import DataBase.DBConnection;
 import DataBase.DBManager;
-import org.jooq.DSLContext;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;

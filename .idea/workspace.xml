@@ -5,11 +5,52 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ENTER/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ENTER/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ConnectionApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ConnectionApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/beam_sdks_java_io_file_based_io_tests_2_16_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jackson_annotations_2_9_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jakarta_xml_bind_api_3_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/sqlite_jdbc_3_41_2_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AP-Project1401.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/databaseTest.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/beam-sdks-java-io-file-based-io-tests-2.16.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jakarta.xml.bind-api-3.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-checker-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-codegen-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-codegen-maven-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-jackson-extensions-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-kotlin-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-kotlin-coroutines-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-meta-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-meta-extensions-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-meta-extensions-hibernate-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-meta-extensions-liquibase-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-postgres-extensions-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-scala_2.13-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/jooq-xtend-3.18.4.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/r2dbc-spi-1.0.0.RELEASE.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jooq/reactive-streams-1.0.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jwt/jackson-annotations-2.9.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jwt/jackson-core-2.9.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jwt/jackson-databind-2.9.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/jwt/jjwt-0.9.1.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libraries/sqlite-jdbc-3.41.2.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Authentication/JWTAuthenticator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Authentication/JWTGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/MethodUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataBase/DBConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DataBase/DBManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/ConnectionApp.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/StartApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +67,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="server" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,6 +104,37 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager" selected="Application.StartApplication">
+    <configuration name="StartApplication" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UserApplicationSrarter.StartApplication" />
+      <module name="AP-Project1401" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UserApplicationSrarter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <module name="AP-Project1401" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.StartApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.StartApplication" />
+        <item itemvalue="Application.StartApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -79,6 +151,7 @@
       <workItem from="1685779605364" duration="6618000" />
       <workItem from="1685792380190" duration="10115000" />
       <workItem from="1685860279820" duration="899000" />
+      <workItem from="1685867922002" duration="3963000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
