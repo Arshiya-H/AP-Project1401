@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ENTER/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ENTER/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ConnectionApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ConnectionApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBase/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBase/DBManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +75,7 @@
       <workItem from="1685775745038" duration="3317000" />
       <workItem from="1685779605364" duration="6618000" />
       <workItem from="1685792380190" duration="10115000" />
-      <workItem from="1685860279820" duration="899000" />
+      <workItem from="1685860279820" duration="3546000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -92,7 +89,13 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
       <updated>1685699095114</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎−۰۰۰۰۳" summary="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.creat &quot;Users&quot; table&#10;2.checking if &quot;userName&quot;, &quot;phoneNumber&quot; and &quot;email&quot; are unique or not">
+      <created>1685866896856</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
+      <updated>1685866896856</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,7 +106,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Client" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -113,6 +128,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creat &quot;DBManager&quot; class." />
+    <MESSAGE value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.creat &quot;Users&quot; table&#10;2.checking if &quot;userName&quot;, &quot;phoneNumber&quot; and &quot;email&quot; are unique or not" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;DBManager&quot; class:&#10;Methods added:&#10;1.creat &quot;Users&quot; table&#10;2.checking if &quot;userName&quot;, &quot;phoneNumber&quot; and &quot;email&quot; are unique or not" />
   </component>
 </project>
