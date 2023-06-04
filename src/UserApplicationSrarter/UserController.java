@@ -3,6 +3,8 @@ package UserApplicationSrarter;
 import Client.User;
 import DataBase.DBManager;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -51,7 +53,7 @@ public class UserController {
             System.out.println("repeat your password :");
             auxPass = scan.nextLine();
 
-        } while (pass.equals(auxPass) && !checkPass(pass));
+        } while (!pass.equals(auxPass) || !checkPass(pass));
 
         System.out.println("enter a country (if you want can see list of country by enter show) :");
         String country = scan.nextLine();
@@ -63,7 +65,9 @@ public class UserController {
         String birthDate = scan.nextLine();
 
 
-        new User(username, firstname, lastname, pass, country, birthDate, choicePhoneOrEmail, phone, email);
+        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
     public static void show() {
@@ -106,7 +110,9 @@ public class UserController {
     public static boolean isValidEmail(String email) {
         String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
-        return pattern.matcher(email).matches();
+        if (pattern.matcher(email).matches()) return true;
+        System.out.println("your email is invalid, try again :");
+        return false;
     }
 }
 

@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/databaseTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/databaseTest.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBase/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBase/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UserApplicationSrarter/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/StartApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,10 +63,37 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.StartApplication">
+    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Server.Server" />
+      <module name="AP-Project1401" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UserApplicationSrarter.StartApplication" />
+      <module name="AP-Project1401" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UserApplicationSrarter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.StartApplication" />
+        <item itemvalue="Application.Server" />
       </list>
     </recent_temporary>
   </component>
@@ -85,6 +114,7 @@
       <workItem from="1685792380190" duration="10115000" />
       <workItem from="1685860279820" duration="899000" />
       <workItem from="1685867922002" duration="5585000" />
+      <workItem from="1685881602326" duration="1463000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -120,5 +150,16 @@
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
     <option name="LAST_COMMIT_MESSAGE" value="Creat &quot;DBManager&quot; class." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

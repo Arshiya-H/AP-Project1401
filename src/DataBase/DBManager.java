@@ -119,16 +119,18 @@ public class DBManager {
         }
         return false;
     }
+
     // Insert Date:
     public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
-            , String country, String birthDate, String inComeDate, String lastChangeDate, String bio, String location, String webAddress, String JWT){
+            , String country, String birthDate, String inComeDate, String lastChangeDate) {
 
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
 
-
-        DB.insertInto(table("Users")).values(userName,firstName,lastName,email,phoneNumber,password,country,birthDate,inComeDate,lastChangeDate
-                ,bio,location,webAddress,JWT).execute();
+        DB.insertInto(table("Users"), field("userName"), field("firstName"), field("lastName"), field("email"),
+                        field("phoneNumber"), field("password"), field("country"), field("birthDate"), field("inComeDate"),
+                        field("lastChangeDate"))
+                .values(userName, firstName, lastName, email, phoneNumber, password, country, birthDate, inComeDate, lastChangeDate).execute();
 
         try {
             dbConnection.getConnection().close();

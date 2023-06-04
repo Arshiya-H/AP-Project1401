@@ -10,7 +10,7 @@ public class StartApplication {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         try {
-            Socket socket = new Socket("localhost", 3000);
+            Socket socket = new Socket("localhost", 2000);
             System.out.println("Choose an option : \n1 - sign up\n2 - sign in");
             String sign = scan.nextLine();
             if (sign.equals("1")) UserController.singUp();
