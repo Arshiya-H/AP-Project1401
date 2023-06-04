@@ -1,13 +1,20 @@
 package ENTER;
 
+import Client.User;
+import DataBase.DBConnection;
+import org.jooq.DSLContext;
+
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Enter_managment {
 
     public static void singUp() {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("enter a UNIQUE user name :");
+        System.out.println("enter a user name :");
         String username = scan.nextLine();
         /////// check username unique .
 
@@ -17,32 +24,40 @@ public class Enter_managment {
         System.out.println("enter your last name :");
         String lastname = scan.nextLine();
 
-        System.out.println("choice BETWEEN email(1) or phone(2) :");
+        System.out.println("choose email(1) or phone(2) or both(3) :");
         String choicePhoneOrEmail = scan.nextLine();
 
-        if (choicePhoneOrEmail.equals("1")) System.out.println("enter your email :");
-        else System.out.println("enter your phone number :");
+        String phone = null, email = null;
 
-        String choice = null;
-
-        if (choicePhoneOrEmail.equals("2")) {
+        if (choicePhoneOrEmail.equals("2") || choicePhoneOrEmail.equals("3")) {
+            System.out.println("enter your phone number :");
             do {
-                if (choice != null) System.out.println("enter a correct phone number :");
-                choice = scan.nextLine();
-            } while (!checkPhoneNumber(choice));
-        } else {
+                if (phone != null) System.out.println("enter a correct phone number :");
+                phone = scan.nextLine();
+            } while (!checkPhoneNumber(phone));
+            ///check side server or duplicate
         }
-
+        if (choicePhoneOrEmail.equals("1") || choicePhoneOrEmail.equals("3")) {
+            System.out.println("enter your email :");
+            do {
+                if (email != null) System.out.println("enter a correct email :");
+                email = scan.nextLine();
+            } while (!isValidEmail(email));
+            ///check side server or duplicate
+        }
 
         String pass = null;
         String auxPass;
+
         do {
-            if (pass != null) System.out.println("please choice correct or enter same password :");
-            else System.out.println("choice a password :");
+
+            if (pass != null) System.out.println("invalid password :");
+            else System.out.println("write a password :");
             pass = scan.nextLine();
 
             System.out.println("repeat your password :");
             auxPass = scan.nextLine();
+
         } while (pass.equals(auxPass) && !checkPass(pass));
 
         System.out.println("enter a country (if you want can see list of country by enter show) :");
@@ -55,6 +70,7 @@ public class Enter_managment {
         String birthDate = scan.nextLine();
 
 
+        new User(username, firstname, lastname, pass, country, birthDate, choicePhoneOrEmail, phone, email);
     }
 
     public static void show() {
@@ -74,10 +90,22 @@ public class Enter_managment {
     }
 
     public static boolean checkPhoneNumber(String phoneNumber) {
+        String[] n = phoneNumber.split("");
         for (int i = 0; i < phoneNumber.length(); i++) {
-            int n = Integer.parseInt(phoneNumber.indent(i));
-            if (!(n >= 0 && n <= 9)) return false;
+            try {
+                int integer = Integer.parseInt(n[i]);
+                if (!(integer >= 0 && integer <= 9)) return false;
+            } catch (Exception e) {
+                return false;
+            }
         }
         return phoneNumber.length() == 11;
     }
+
+    public static boolean isValidEmail(String email) {
+        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(email).matches();
+    }
 }
+
