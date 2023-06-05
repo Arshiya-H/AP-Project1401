@@ -3,9 +3,19 @@ package DataBase;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.jooq.impl.DSL.*;
+import static org.jooq.impl.SQLDataType.BLOB;
 import static org.jooq.impl.SQLDataType.VARCHAR;
 
 /**
@@ -36,6 +46,8 @@ public class DBManager {
                 .column("webAddress", VARCHAR(255))
                 .column("JWT", VARCHAR(255))
                 .column("secretKey", VARCHAR(255))
+                .column("avatar", BLOB)
+                .column("header", BLOB)
                 .execute();
         try {
             dbConnection.getConnection().close();
@@ -43,6 +55,96 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+    //------------------------------------------------------------------------------------
+    // A table in database for handling following ande followers:
+    public static  void  creatFollowingTable(){
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        DB.createTableIfNotExists("Followings")
+                .column("userName",VARCHAR(255))
+                .column("userNameFollowed",VARCHAR(255))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    //------------------------------------------------------------------------------------
+    //If you want to follow:
+    /**
+     * This method is for checking if user we want to follow has already followed or not
+     * @return boolean
+     * True: if user we want to follow in "follow" method has already followed
+     * False: if user we want to follow han not followed yet
+     * */
+    private static boolean checkUserFollowed(String userNameFollowed, ArrayList<String> selectedUsers){
+        for (String selectedUser : selectedUsers) {
+            if (selectedUser.equals(userNameFollowed)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public static void follow(String userName , String userNameFollowed)  {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT userNameFollowed FROM Followings WHERE userName = ? ");
+            statement.setString(1,userName);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+
+                ArrayList<String> selectedUsers = new ArrayList<>();
+                while(result.next()){
+                    String tempUsername = result.getString("userNameFollowed");
+                    selectedUsers.add(tempUsername);
+                }
+                if (checkUserFollowed(userNameFollowed,selectedUsers)) {
+                    System.out.println("You've already followed this user!");
+                    connection.close();
+                    return;
+                }
+            } else {
+                System.out.println("Invalid username!");
+                connection.close();
+                return;
+            }
+        }catch (SQLException e){
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+
+        DB.insertInto(table("Followings"), field("userName"), field("userNameFollowed")).values(userName,userNameFollowed).execute();
+    }
+    public static void  unFollow(String userName , String userNameFollowed){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM Followings WHERE userName = ? AND userNameFollowed = ?");
+            stm.setString(1,userName);
+            stm.setString(2,userNameFollowed);
+            int rowsAffected = stm.executeUpdate();
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+
+    }
+    //------------------------------------------------------------------------------------
+
 
     /**
      * @return boolean
@@ -268,7 +370,6 @@ public class DBManager {
                 .from(table("Users"))
                 .where(field("userName").eq(userName))
                 .fetchOne();
-
         String password = null;
         if (record != null) password = record.getValue(field("password"), String.class);
 
@@ -282,4 +383,26 @@ public class DBManager {
         }
         return false;
     }
+
+    // subject : is the field we want to change (header or avatar)
+    //       ************** Attention!! **************
+    public static void updateAvatarOrHeader(String path, String userName,String subject) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        try {
+            BufferedImage image = ImageIO.read(new File(path));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+            byte[] imageData = baos.toByteArray();
+            DB.update(table("Users"))
+                    .set(field(subject), imageData)
+                    .where(field("userName").eq(userName))
+                    .execute();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+
 }

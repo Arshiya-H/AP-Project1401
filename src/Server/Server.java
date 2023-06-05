@@ -16,6 +16,7 @@ public class Server {
 
     public static void main(String[] args) throws IOException {
         DBManager.creatUsersTable();
+        DBManager.creatFollowingTable();
         ServerSocket ServerSocket = new ServerSocket(2000);
         Server Server = new Server(ServerSocket);
         try {
