@@ -124,6 +124,25 @@ public class DBManager {
 
         DB.insertInto(table("Followings"), field("userName"), field("userNameFollowed")).values(userName,userNameFollowed).execute();
     }
+    public static void  unFollow(String userName , String userNameFollowed){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("DELETE FROM Followings WHERE userName = ? AND userNameFollowed = ?");
+            stm.setString(1,userName);
+            stm.setString(2,userNameFollowed);
+            int rowsAffected = stm.executeUpdate();
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+
+    }
     //------------------------------------------------------------------------------------
 
 

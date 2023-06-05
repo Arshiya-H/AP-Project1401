@@ -117,7 +117,7 @@
       <workItem from="1685860279820" duration="899000" />
       <workItem from="1685867922002" duration="5585000" />
       <workItem from="1685881602326" duration="11314000" />
-      <workItem from="1685949032169" duration="5206000" />
+      <workItem from="1685949032169" duration="6769000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -137,7 +137,13 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
       <updated>1685950066265</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎−۰۰۰۰۴" summary="Add a table (&quot;Followings&quot;) to handle followings and followers&#10;Add method to follow.It updates &quot;Followings&quot; table">
+      <created>1685970207842</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۴" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۴" />
+      <updated>1685970207842</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +177,7 @@
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
     <MESSAGE value="Add a method to set avatar or header." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add a method to set avatar or header." />
+    <MESSAGE value="Add a table (&quot;Followings&quot;) to handle followings and followers&#10;Add method to follow.It updates &quot;Followings&quot; table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a table (&quot;Followings&quot;) to handle followings and followers&#10;Add method to follow.It updates &quot;Followings&quot; table" />
   </component>
 </project>
