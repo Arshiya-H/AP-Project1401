@@ -176,6 +176,90 @@ public class DBManager {
         }
     }
 
+    public static void updatePhoneNumber(String userName, String phoneNumber) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("phoneNumber"), phoneNumber)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateEmail(String userName, String email) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("email"), email)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateBio(String userName, String bio) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("bio"), bio)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateLocation(String userName, String location) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("location"), location)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updatePassword(String userName, String pass) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("password"), pass)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateWebAddress(String userName, String webAddress) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field("webAddress"), webAddress)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static boolean checkPass(String userName, String pass) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
