@@ -22,10 +22,10 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         while (socket.isConnected()) {
             try {
                 order = bufferedReader.readLine();
-                switch (order) {    //  1-signup    2-sign in   3-logout
+                switch (order) {    //  1-signup    2-sign in   3-log out
                     case "1" -> signUp();
                     case "2" -> signIn();
-//                case "3" ->
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -34,27 +34,27 @@ public class ConnectionApp extends ObjectStream implements Runnable {
     }
 
     public void signUp() {
+        boolean check = false;
         try {
             String[] order;
-            while (socket.isConnected()) {
+            while (socket.isConnected() && !check) {
                 order = bufferedReader.readLine().split("//");
                 switch (order[0]) {
                     case "1" -> {
-                        bufferedWriter.write(checkUserName(order[1]) ? "ture\n" : "false\n");
+                        bufferedWriter.write(checkUserName(order[1]) ? "true\n" : "false\n");
                         bufferedWriter.flush();
                     }
                     case "2" -> {
-                        bufferedWriter.write(checkPhoneNumber(order[1]) ? "ture\n" : "false\n");
-                        bufferedWriter.flush();
+                        phoneNumber(order[1]);
                     }
                     case "3" -> {
-                        bufferedWriter.write(isValidEmail(order[1]) ? "ture\n" : "false\n");
-                        bufferedWriter.flush();
+                        email(order[1]);
                     }
                     case "4" -> {
-                        bufferedWriter.write(checkPass(order[1]) ? "ture\n" : "false\n");
+                        bufferedWriter.write(checkPass(order[1]) ? "true\n" : "false\n");
                         bufferedWriter.flush();
                     }
+                    case "5" -> check = true;
                 }
             }
         } catch (IOException e) {
@@ -63,19 +63,73 @@ public class ConnectionApp extends ObjectStream implements Runnable {
     }
 
     public void signIn() {
+        boolean check = false;
         try {
-            String[] order;
-            while (socket.isConnected()) {
-                order = bufferedReader.readLine().split("//");
+            while (socket.isConnected() && !check) {
+                String read = bufferedReader.readLine();
+                String[] order = read.split("//");
                 switch (order[0]) {
                     case "1" -> {
-                        bufferedWriter.write(checkUserName(order[1]) ? "ture\n" : "false\n");
+                        bufferedWriter.write(checkUserName(order[1]) ? "true\n" : "false\n");
                         bufferedWriter.flush();
                     }
                     case "2" -> {
-                        bufferedWriter.write(DBManager.checkPass(order[1], order[2]) ? "ture\n" : "false\n");
+                        check = DBManager.checkPass(order[1], order[2]);
+                        bufferedWriter.write(check ? "true\n" : "false\n");
                         bufferedWriter.flush();
                     }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        afterSignIn();
+    }
+
+    public void afterSignIn() {
+        try {
+            String order;
+            while (socket.isConnected()) {
+                order = bufferedReader.readLine();
+                switch (order) {
+                    case "1" -> {
+                        return;
+                    }
+                    case "2" -> editProfile();
+
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void editProfile() {
+        boolean check = false;
+        try {
+            String[] order;
+            while (socket.isConnected() && !check) {
+                order = bufferedReader.readLine().split("//");
+                switch (order[0]) {
+                    case "2" -> {
+                        phoneNumber(order[1]);
+                        String[] aux = bufferedReader.readLine().split("//");
+                        boolean answer = checkPhoneNumber(aux[2]);
+                        bufferedWriter.write(answer ? "true\n" : "false\n");
+                        bufferedWriter.flush();
+                        if (answer) DBManager.updatePhoneNumber(order[1], order[2]);
+                    }
+                    case "3" -> DBManager.updateEmail(order[1], order[2]);
+                    case "4" -> DBManager.updatePassword(order[1], order[2]);
+                    case "5" -> DBManager.updateBio(order[1], order[2]);
+                    case "6" -> DBManager.updateLocation(order[1], order[2]);
+                    case "7" -> DBManager.updateWebAddress(order[1], order[2]);
+                    case "8" -> DBManager.updateAvatarOrHeader(order[2], order[1], "avatar");
+                    case "9" -> DBManager.updateAvatarOrHeader(order[2], order[1], "header");
+                    case "0" -> {
+                        return;
+                    }
+
                 }
             }
         } catch (IOException e) {
@@ -114,7 +168,7 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         if (phoneNumber.length() != 11) {
             return false;
         }
-        return !DBManager.checkPhoneNumber(phoneNumber);
+        return true;
     }
 
     public static boolean isValidEmail(String email) {
@@ -123,4 +177,43 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         if (pattern.matcher(email).matches()) return !DBManager.checkEmail(email);
         return false;
     }
+
+    public static void phoneNumber(String phoneNumber) {
+        try {
+            if (!checkPhoneNumber(phoneNumber)) {
+                bufferedWriter.write("invalid\n");
+                bufferedWriter.flush();
+                return;
+            }
+            if (DBManager.checkPhoneNumber(phoneNumber)) {
+                bufferedWriter.write("repeat\n");
+                bufferedWriter.flush();
+                return;
+            }
+            bufferedWriter.write("true\n");
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void email(String email) {
+        try {
+            if (!isValidEmail(email)) {
+                bufferedWriter.write("invalid\n");
+                bufferedWriter.flush();
+                return;
+            }
+            if (DBManager.checkEmail(email)) {
+                bufferedWriter.write("repeat\n");
+                bufferedWriter.flush();
+                return;
+            }
+            bufferedWriter.write("true\n");
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
