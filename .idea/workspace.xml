@@ -61,7 +61,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.StartApplication">
+  <component name="RunManager">
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Server.Server" />
       <module name="AP-Project1401" />
@@ -117,7 +117,7 @@
       <workItem from="1685860279820" duration="899000" />
       <workItem from="1685867922002" duration="5585000" />
       <workItem from="1685881602326" duration="11314000" />
-      <workItem from="1685949032169" duration="974000" />
+      <workItem from="1685949032169" duration="5206000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -131,7 +131,13 @@
       <option name="presentableId" value="LOCAL‎−۰۰۰۰۲" />
       <updated>1685699095114</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL‎−۰۰۰۰۳" summary="Add a method to set avatar or header.">
+      <created>1685950066265</created>
+      <option name="number" value="LOCAL‎−۰۰۰۰۳" />
+      <option name="presentableId" value="LOCAL‎−۰۰۰۰۳" />
+      <updated>1685950066265</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,6 +170,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Creat &quot;DBManager&quot; class." />
+    <MESSAGE value="Add a method to set avatar or header." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add a method to set avatar or header." />
   </component>
 </project>
