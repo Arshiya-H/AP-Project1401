@@ -3,9 +3,14 @@ package DataBase;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
-
 import static org.jooq.impl.DSL.*;
+import static org.jooq.impl.SQLDataType.BLOB;
 import static org.jooq.impl.SQLDataType.VARCHAR;
 
 /**
@@ -36,6 +41,8 @@ public class DBManager {
                 .column("webAddress", VARCHAR(255))
                 .column("JWT", VARCHAR(255))
                 .column("secretKey", VARCHAR(255))
+                .column("avatar", BLOB)
+                .column("header", BLOB)
                 .execute();
         try {
             dbConnection.getConnection().close();
@@ -184,7 +191,6 @@ public class DBManager {
                 .from(table("Users"))
                 .where(field("userName").eq(userName))
                 .fetchOne();
-
         String password = null;
         if (record != null) password = record.getValue(field("password"), String.class);
 
@@ -198,4 +204,26 @@ public class DBManager {
         }
         return false;
     }
+
+    // subject : is the field we want to change (header or avatar)
+    //       ************** Attention!! **************
+    public static void updateAvatarOrHeader(String path, String userName,String subject) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        try {
+            BufferedImage image = ImageIO.read(new File(path));
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image, "jpg", baos);
+            byte[] imageData = baos.toByteArray();
+            DB.update(table("Users"))
+                    .set(field(subject), imageData)
+                    .where(field("userName").eq(userName))
+                    .execute();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
+
 }

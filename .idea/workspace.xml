@@ -5,17 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="56721086-d08a-4a12-84d4-f37a3d8fde92" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Authentication/JWT.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/databaseTest.db" beforeDir="false" afterPath="$PROJECT_DIR$/databaseTest.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/JWTAuthenticator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Authentication/JWTGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Client/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Client/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataBase/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBase/DBManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/ConnectionApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/ConnectionApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserApplicationSrarter/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/StartApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +27,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -125,6 +117,7 @@
       <workItem from="1685860279820" duration="899000" />
       <workItem from="1685867922002" duration="5585000" />
       <workItem from="1685881602326" duration="11314000" />
+      <workItem from="1685949032169" duration="974000" />
     </task>
     <task id="LOCAL‎−۰۰۰۰۱" summary="Initial commit:&#10;Add &quot;DBConnection&quot; class.">
       <created>1685698643843</created>
@@ -149,7 +142,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="DataBase" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -160,26 +165,5 @@
     <MESSAGE value="Initial commit:&#10;Add &quot;DBConnection&quot; class." />
     <MESSAGE value="Creat &quot;DBManager&quot; class." />
     <option name="LAST_COMMIT_MESSAGE" value="Creat &quot;DBManager&quot; class." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/UserApplicationSrarter/UserController.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/DataBase/DBManager.java</url>
-          <line>127</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
