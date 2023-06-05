@@ -87,33 +87,34 @@ public class DBManager {
         }
         return false;
     }
-    public static void follow(String userName , String userNameFollowed)  {
+    public static void follow(String userName, String userNameFollowed) {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
         DSLContext DB = dbConnection.getDB();
 
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT userNameFollowed FROM Followings WHERE userName = ? ");
-            statement.setString(1,userName);
+            statement.setString(1, userName);
             ResultSet result = statement.executeQuery();
-            if (result.next()) {
 
-                ArrayList<String> selectedUsers = new ArrayList<>();
-                while(result.next()){
-                    String tempUsername = result.getString("userNameFollowed");
-                    selectedUsers.add(tempUsername);
-                }
-                if (checkUserFollowed(userNameFollowed,selectedUsers)) {
-                    System.out.println("You've already followed this user!");
-                    connection.close();
-                    return;
-                }
-            } else {
-                System.out.println("Invalid username!");
+            PreparedStatement statement1 = connection.prepareStatement("SELECT COUNT(*) FROM Followings");
+            ResultSet result1 = statement1.executeQuery();
+            int count = result1.getInt(1);
+            if (count == 0) {
+                DB.insertInto(table("Followings"), field("userName"), field("userNameFollowed")).values(userName, userNameFollowed).execute();
+                return;
+            }
+            ArrayList<String> selectedUsers = new ArrayList<>();
+            while (result.next()) {
+                String tempUsername = result.getString("userNameFollowed");
+                selectedUsers.add(tempUsername);
+            }
+            if (checkUserFollowed(userNameFollowed, selectedUsers)) {
+                System.out.println("You've already followed this user!");
                 connection.close();
                 return;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -122,7 +123,7 @@ public class DBManager {
             e.printStackTrace();
         }
 
-        DB.insertInto(table("Followings"), field("userName"), field("userNameFollowed")).values(userName,userNameFollowed).execute();
+        DB.insertInto(table("Followings"), field("userName"), field("userNameFollowed")).values(userName, userNameFollowed).execute();
     }
     public static void  unFollow(String userName , String userNameFollowed){
         DBConnection dbConnection = new DBConnection();
@@ -142,6 +143,60 @@ public class DBManager {
             e.printStackTrace();
         }
 
+    }
+    public static ArrayList<String> getFollowings(String userName) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+        ArrayList<String> followingUsers = new ArrayList<>();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT userNameFollowed FROM Followings WHERE userName = ?");
+            stm.setString(1, userName);
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                String tempUsers = result.getString("userNameFollowed");
+                followingUsers.add(tempUsers);
+            }
+            return followingUsers;
+
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        // *******************"NullPointerException"*******************
+        return null;
+    }
+    public static ArrayList<String> getFollowers(String userName){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+        ArrayList<String> followerUsers = new ArrayList<>();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT userName FROM Followings WHERE userNameFollowed = ?");
+            stm.setString(1, userName);
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                String tempUsers = result.getString("userName");
+                followerUsers.add(tempUsers);
+            }
+            return followerUsers;
+
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        // *******************"NullPointerException"*******************
+        return null;
     }
     //------------------------------------------------------------------------------------
 
