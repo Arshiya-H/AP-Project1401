@@ -48,10 +48,11 @@ public class UserController {
         System.out.println("enter your birthdate by this format YYYY/MM/DD :");
         String birthDate = scan.nextLine();
 
+        ObjectStream.WRITE(InsertUser + "");
         ObjectStream.WRITE(username + "//" + firstname + "//" + lastname + "//" + email + "//" + phone + "//" + pass + "//" + country + "//" + birthDate);
-        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+//        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
+//                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+//                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
     public static void show() {
