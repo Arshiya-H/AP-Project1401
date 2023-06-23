@@ -148,6 +148,62 @@ public class DBManager {
         }
 
     }
+
+    public static ArrayList<String> getFollowings(String userName) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+        ArrayList<String> followingUsers = new ArrayList<>();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT userNameFollowed FROM Followings WHERE userName = ?");
+            stm.setString(1, userName);
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                String tempUsers = result.getString("userNameFollowed");
+                followingUsers.add(tempUsers);
+            }
+            return followingUsers;
+
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        // *******************"NullPointerException"*******************
+        return null;
+    }
+
+    public static ArrayList<String> getFollowers(String userName) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+        ArrayList<String> followerUsers = new ArrayList<>();
+
+        try {
+            PreparedStatement stm = connection.prepareStatement("SELECT userName FROM Followings WHERE userNameFollowed = ?");
+            stm.setString(1, userName);
+            ResultSet result = stm.executeQuery();
+
+            while (result.next()) {
+                String tempUsers = result.getString("userName");
+                followerUsers.add(tempUsers);
+            }
+            return followerUsers;
+
+        } catch (SQLException e) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+        // *******************"NullPointerException"*******************
+        return null;
+    }
     //------------------------------------------------------------------------------------
 
 
@@ -388,6 +444,7 @@ public class DBManager {
         }
         return false;
     }
+
 
     // subject : is the field we want to change (header or avatar)
     //       ************** Attention!! **************
