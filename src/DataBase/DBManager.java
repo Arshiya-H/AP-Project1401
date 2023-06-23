@@ -283,7 +283,7 @@ public class DBManager {
         }
     }
 
-    public static void updatePhoneNumber(String userName, String phoneNumber) {
+    public static void updatePhoneNumber(String phoneNumber, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
@@ -297,7 +297,7 @@ public class DBManager {
         }
     }
 
-    public static void updateEmail(String userName, String email) {
+    public static void updateEmail(String email, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
@@ -311,7 +311,7 @@ public class DBManager {
         }
     }
 
-    public static void updateBio(String userName, String bio) {
+    public static void updateBio(String bio, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
@@ -325,7 +325,7 @@ public class DBManager {
         }
     }
 
-    public static void updateLocation(String userName, String location) {
+    public static void updateLocation(String location, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
@@ -339,7 +339,7 @@ public class DBManager {
         }
     }
 
-    public static void updatePassword(String userName, String pass) {
+    public static void updatePassword(String pass, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
@@ -353,7 +353,7 @@ public class DBManager {
         }
     }
 
-    public static void updateWebAddress(String userName, String webAddress) {
+    public static void updateWebAddress(String webAddress, String userName) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))

@@ -1,10 +1,15 @@
 package Server;
 
 import DataBase.DBManager;
+import UserApplicationSrarter.ORDER;
 import inheritance.ObjectStream;
 
-import java.io.IOException;
 import java.net.Socket;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 public class ConnectionApp extends ObjectStream implements Runnable {
@@ -18,125 +23,90 @@ public class ConnectionApp extends ObjectStream implements Runnable {
 
     @Override
     public void run() {
-        String order;
         while (socket.isConnected()) {
-            try {
-                order = bufferedReader.readLine();
-                switch (order) {    //  1-signup    2-sign in   3-log out
-                    case "1" -> signUp();
-                    case "2" -> signIn();
+            switch (ORDER.valueOf(READ())) {
+                case CheckUserName -> WRITE(checkUserName(READ()) + "");
+                case PhoneNumber -> phoneNumber(READ());
+                case Email -> email(READ());
+                case CheckPass -> WRITE(checkPass(READ()) + "");
+                case InsertUser -> InsertUser();
+                case CheckPassSingIn -> WRITE(DBManager.checkPass(READ(), READ()) + "");
+                case AcceptSignIn -> AcceptSingIn();
 
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(READ(), READ());
+                case UpdateEmail -> DBManager.updateEmail(READ(), READ());
+                case UpdatePassword -> DBManager.updatePassword(READ(), READ());
+                case UpdateBio -> DBManager.updateBio(READ(), READ());
+                case UpdateLocation -> DBManager.updateLocation(READ(), READ());
+                case UpdateWebAddress -> DBManager.updateWebAddress(READ(), READ());
+                case UpdateAvatar -> DBManager.updateAvatarOrHeader(READ(), READ(), "avatar");
+                case UpdateHeader -> DBManager.updateAvatarOrHeader(READ(), READ(), "header");
+                case LOGIUT -> DBManager.updateSecretKeyAndJWT(READ(), null, null);
             }
         }
     }
 
-    public void signUp() {
-        boolean check = false;
+
+    public void AcceptSingIn() {
+        String secertyKey;
+        do secertyKey = Authentication.JWT.generateSecurityKey();
+        while (DBManager.checkSecurityKay(secertyKey));
+        String Username = READ();
         try {
-            String[] order;
-            while (socket.isConnected() && !check) {
-                order = bufferedReader.readLine().split("//");
-                switch (order[0]) {
-                    case "1" -> {
-                        bufferedWriter.write(checkUserName(order[1]) ? "true\n" : "false\n");
-                        bufferedWriter.flush();
-                    }
-                    case "2" -> {
-                        phoneNumber(order[1]);
-                    }
-                    case "3" -> {
-                        email(order[1]);
-                    }
-                    case "4" -> {
-                        bufferedWriter.write(checkPass(order[1]) ? "true\n" : "false\n");
-                        bufferedWriter.flush();
-                    }
-                    case "5" -> check = true;
-                }
-            }
-        } catch (IOException e) {
+            DBManager.updateSecretKeyAndJWT(Username, secertyKey, Authentication.JWT.generateJWT(Username, secertyKey));
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
 
-    public void signIn() {
-        boolean check = false;
-        try {
-            while (socket.isConnected() && !check) {
-                String read = bufferedReader.readLine();
-                String[] order = read.split("//");
-                switch (order[0]) {
-                    case "1" -> {
-                        bufferedWriter.write(checkUserName(order[1]) ? "true\n" : "false\n");
-                        bufferedWriter.flush();
-                    }
-                    case "2" -> {
-                        check = DBManager.checkPass(order[1], order[2]);
-                        bufferedWriter.write(check ? "true\n" : "false\n");
-                        bufferedWriter.flush();
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        afterSignIn();
+    public void InsertUser() {
+        String[] in = READ().split("//");
+        DBManager.insertUserToDB(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7],
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
-    public void afterSignIn() {
-        try {
-            String order;
-            while (socket.isConnected()) {
-                order = bufferedReader.readLine();
-                switch (order) {
-                    case "1" -> {
-                        return;
-                    }
-                    case "2" -> editProfile();
 
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void editProfile() {
-        boolean check = false;
-        try {
-            String[] order;
-            while (socket.isConnected() && !check) {
-                order = bufferedReader.readLine().split("//");
-                switch (order[0]) {
-                    case "2" -> {
-                        phoneNumber(order[1]);
-                        String[] aux = bufferedReader.readLine().split("//");
-                        boolean answer = checkPhoneNumber(aux[2]);
-                        bufferedWriter.write(answer ? "true\n" : "false\n");
-                        bufferedWriter.flush();
-                        if (answer) DBManager.updatePhoneNumber(order[1], order[2]);
-                    }
-                    case "3" -> DBManager.updateEmail(order[1], order[2]);
-                    case "4" -> DBManager.updatePassword(order[1], order[2]);
-                    case "5" -> DBManager.updateBio(order[1], order[2]);
-                    case "6" -> DBManager.updateLocation(order[1], order[2]);
-                    case "7" -> DBManager.updateWebAddress(order[1], order[2]);
-                    case "8" -> DBManager.updateAvatarOrHeader(order[2], order[1], "avatar");
-                    case "9" -> DBManager.updateAvatarOrHeader(order[2], order[1], "header");
-                    case "0" -> {
-                        return;
-                    }
-
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
+//    public void signUp() {
+//        boolean check = false;
+//        String[] order;
+//        while (socket.isConnected() && !check) {
+//            order = READ().split("//");
+//            switch (order[0]) {
+//                case "1" -> {
+//                    WRITE(checkUserName(order[1]) ? "true\n" : "false\n");
+//                }
+//                case "2" -> {
+//                    phoneNumber(order[1]);
+//                }
+//                case "3" -> {
+//                    email(order[1]);
+//                }
+//                case "4" -> {
+//                    WRITE(checkPass(order[1]) ? "true\n" : "false\n");
+//                }
+//                case "5" -> check = true;
+//            }
+//        }
+//
+//    }
+//
+//    public void signIn() {
+//        boolean check = false;
+//        while (socket.isConnected() && !check) {
+//            String read = READ();
+//            String[] order = read.split("//");
+//            switch (order[0]) {
+//                case "1" -> {
+//                    WRITE(checkUserName(order[1]) ? "true\n" : "false\n");
+//                }
+//                case "2" -> {
+//                    WRITE(DBManager.checkPass(READ(), READ()) + "");
+//                }
+//            }
+//        }
+//        afterSignIn();
+//    }
 
     public static boolean checkUserName(String userName) {
         return DBManager.checkUserName(userName);
@@ -179,41 +149,26 @@ public class ConnectionApp extends ObjectStream implements Runnable {
     }
 
     public static void phoneNumber(String phoneNumber) {
-        try {
-            if (!checkPhoneNumber(phoneNumber)) {
-                bufferedWriter.write("invalid\n");
-                bufferedWriter.flush();
-                return;
-            }
-            if (DBManager.checkPhoneNumber(phoneNumber)) {
-                bufferedWriter.write("repeat\n");
-                bufferedWriter.flush();
-                return;
-            }
-            bufferedWriter.write("true\n");
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!checkPhoneNumber(phoneNumber)) {
+            WRITE("invalid");
+            return;
         }
+        if (DBManager.checkPhoneNumber(phoneNumber)) {
+            WRITE("repeat");
+            return;
+        }
+        WRITE("true");
     }
 
     public static void email(String email) {
-        try {
-            if (!isValidEmail(email)) {
-                bufferedWriter.write("invalid\n");
-                bufferedWriter.flush();
-                return;
-            }
-            if (DBManager.checkEmail(email)) {
-                bufferedWriter.write("repeat\n");
-                bufferedWriter.flush();
-                return;
-            }
-            bufferedWriter.write("true\n");
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!isValidEmail(email)) {
+            WRITE("invalid");
+            return;
         }
+        if (DBManager.checkEmail(email)) {
+            WRITE("repeat");
+            return;
+        }
+        WRITE("true");
     }
-
 }

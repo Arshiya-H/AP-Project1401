@@ -1,37 +1,27 @@
 package UserApplicationSrarter;
 
-import Authentication.JWT;
 import DataBase.DBManager;
-import Server.ConnectionApp;
+import inheritance.ObjectStream;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import static UserApplicationSrarter.ORDER.*;
 
 public class UserController {
 
-    public static void singUp(BufferedWriter bufferedWriter, BufferedReader bufferedReader) throws IOException {
-        String username = null, phone = null, email = null, pass = null, auxPass, result = null;
+    public static void singUp(ObjectStream stream) {
+        String username = null, phone = null, email = null, pass = null;
         Scanner scan = new Scanner(System.in);
 
         System.out.println("enter a user name :");
-        try {
-            do {
-                if (username != null) System.out.println("the username has existed already, choose another :");
-                username = scan.nextLine();
-                bufferedWriter.write(("1//" + username + "\n"));
-                bufferedWriter.flush();
-            } while (!bufferedReader.readLine().equals("false"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        do {
+            if (username != null) System.out.println("the username has existed already, choose another :");
+            username = scan.nextLine();
+            ObjectStream.WRITE((String.valueOf(CheckUserName)));
+            ObjectStream.WRITE((username));
+        } while (!stream.READ().equals("false"));
         System.out.println("enter your first name :");
         String firstname = scan.nextLine();
 
@@ -42,15 +32,12 @@ public class UserController {
         String choicePhoneOrEmail = scan.nextLine();
 
         if (choicePhoneOrEmail.equals("2") || choicePhoneOrEmail.equals("3"))
-            phone = getPhoneNumber(bufferedWriter, bufferedReader);
+            phone = getPhoneNumber(stream);
 
         if (choicePhoneOrEmail.equals("1") || choicePhoneOrEmail.equals("3"))
-            email = getEmail(bufferedWriter, bufferedReader);
+            email = getEmail(stream);
 
-        pass = getPass(bufferedWriter, bufferedReader);
-
-        bufferedWriter.write("5\n");
-        bufferedWriter.flush();
+        pass = getPass(stream);
 
         System.out.println("enter a country (if you want can see list of country by enter show) :");
         String country = scan.nextLine();
@@ -61,6 +48,7 @@ public class UserController {
         System.out.println("enter your birthdate by this format YYYY/MM/DD :");
         String birthDate = scan.nextLine();
 
+        ObjectStream.WRITE(username + "//" + firstname + "//" + lastname + "//" + email + "//" + phone + "//" + pass + "//" + country + "//" + birthDate);
         DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
@@ -70,195 +58,177 @@ public class UserController {
         System.out.println("\tlist of country :\niran");
     }
 
-    public static void signIn(BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+    public static void signIn(ObjectStream stream) {
         Scanner scan = new Scanner(System.in);
-        String username = null, pass = null, secertyKey;
-        try {
-            System.out.println("enter your username :");
-            do {
-                if (username != null) System.out.println("the username has not existed, choose another :");
-                username = scan.nextLine();
-                bufferedWriter.write("1//" + username + "\n");
-                bufferedWriter.flush();
-            }
-            while (bufferedReader.readLine().equals("false"));
+        String username = null, pass = null;
+        System.out.println("enter your username :");
+        do {
+            if (username != null) System.out.println("the username has not existed, choose another :");
+            username = scan.nextLine();
+            ObjectStream.WRITE((String.valueOf(CheckUserName)));
+            ObjectStream.WRITE((username));
+        } while (stream.READ().equals("false"));
 
-            System.out.println("enter your password :");
-            do {
-                if (pass != null) System.out.println("invalid pass, try again :");
-                pass = scan.nextLine();
-                bufferedWriter.write("2//" + username + "//" + pass + "\n");
-                bufferedWriter.flush();
-            }
-            while (bufferedReader.readLine().equals("false"));
-
-
-            do secertyKey = JWT.generateSecurityKey();
-            while (DBManager.checkSecurityKay(secertyKey));
-
-
-            DBManager.updateSecretKeyAndJWT(username, secertyKey, JWT.generateJWT(username, secertyKey));
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException | IOException e) {
-            e.printStackTrace();
+        System.out.println("enter your password :");
+        do {
+            if (pass != null) System.out.println("invalid pass, try again :");
+            pass = scan.nextLine();
+            ObjectStream.WRITE(String.valueOf(CheckPassSingIn));
+            ObjectStream.WRITE(username);
+            ObjectStream.WRITE(pass);
         }
+        while (stream.READ().equals("false"));
 
-        afterSignIn(username, bufferedWriter, bufferedReader);
+        ObjectStream.WRITE(String.valueOf(AcceptSignIn));
+        ObjectStream.WRITE(username);
+
+        afterSignIn(username, stream);
     }
 
-    public static void afterSignIn(String username, BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
-        Scanner scan = new Scanner(System.in);
-        try {
-            while (true) {
-                System.out.println("\t1 - log out\n\t2 - edit profile");
-                String order = scan.nextLine();
-                switch (order) {
-                    case "1" -> {
-                        bufferedWriter.write("1\n");
-                        bufferedWriter.flush();
-                        return;
-                    }
-                    case "2" -> {
-                        bufferedWriter.write("2\n");
-                        bufferedWriter.flush();
-                        editProfile(username, bufferedWriter, bufferedReader);
-                    }
-
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void editProfile(String username, BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+    public static void afterSignIn(String username, ObjectStream stream) {
         Scanner scan = new Scanner(System.in);
         while (true) {
-            System.out.println("\t1 - enter phone number\n\t2 - enter email\n\t3 - change password\n\t" +
-                    "4 - write a bio\n\t5 - set location\n\t6 - write your web address\n\t7 - set avatar\n\t" +
-                    "8 - set header\n\t9 - back");
+            System.out.println("\t1 - log out\n\t2 - edit profile");
             String order = scan.nextLine();
-            try {
-                switch (order) {
-                    case "1" -> {
-                        bufferedWriter.write("1//" + username + "//" + getPhoneNumber(bufferedWriter, bufferedReader) + "\n");
-                        bufferedWriter.flush();
-
-                    }
-                    case "2" -> {
-                        bufferedWriter.write("2//" + username + "//" + getEmail(bufferedWriter, bufferedReader) + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "3" -> {
-                        bufferedWriter.write("3//" + username + "//" + getPass(bufferedWriter, bufferedReader) + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "4" -> {
-                        System.out.println("enter your bio (at most character is 160)");
-                        String bio = null;
-                        do {
-                            if (bio != null) System.out.println("your bio is too long,try again by at most 160 character :");
-                            bio = scan.nextLine();
-                        } while (!(bio.length() <= 160));
-                        bufferedWriter.write("4//" + username + "//" + bio + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "5" -> {
-                        System.out.println("write your location :");
-                        bufferedWriter.write("5//" + username + "//" + scan.nextLine() + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "6" -> {
-                        System.out.println("write your web address :");
-                        bufferedWriter.write("6//" + username + "//" + scan.nextLine() + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "7" -> {
-                        System.out.println("Give path of your avatar file like this(c:\\directory\\file_name.jpg) ");
-                        bufferedWriter.write("7//" + username + "//" + scan.nextLine() + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "8" -> {
-                        System.out.println("Give path of your header file like this(c:\\directory\\file_name.jpg) ");
-                        bufferedWriter.write("7//" + username + "//" + scan.nextLine() + "\n");
-                        bufferedWriter.flush();
-                    }
-                    case "9" -> {
-                        return;
-                    }
+            switch (order) {
+                case "1" -> {
+                    stream.WRITE(LOGIUT + "");
+                    stream.WRITE(username);
+                    return;
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                case "2" -> editProfile(username, stream);
             }
         }
     }
 
-    public static String getPhoneNumber(BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+    public static void editProfile(String username, ObjectStream stream) {
+        Scanner scan = new Scanner(System.in);
+        while (true) {
+            System.out.println("""
+                    \t1 - enter phone number
+                    \t2 - enter email
+                    \t3 - change password
+                    \t4 - write a bio
+                    \t5 - set location
+                    \t6 - write your web address
+                    \t7 - set avatar
+                    \t8 - set header
+                    \t9 - back""");
+
+            switch (scan.nextLine()) {
+                case "1" -> {
+                    String PhoneNumber = getPhoneNumber(stream);
+                    ObjectStream.WRITE(String.valueOf(UpdatePhoneNumber));
+                    ObjectStream.WRITE(PhoneNumber);
+                    ObjectStream.WRITE(username);
+                }
+                case "2" -> {
+                    String Email = getEmail(stream);
+                    ObjectStream.WRITE(String.valueOf(UpdateEmail));
+                    ObjectStream.WRITE(Email);
+                    ObjectStream.WRITE(username);
+                }
+                case "3" -> {
+                    String Pass = getPass(stream);
+                    ObjectStream.WRITE(String.valueOf(UpdatePassword));
+                    ObjectStream.WRITE(Pass);
+                    ObjectStream.WRITE(username);
+                }
+                case "4" -> {
+                    System.out.println("enter your bio (at most character is 160)");
+                    String bio = null;
+                    do {
+                        if (bio != null) System.out.println("your bio is too long,try again by at most 160 character :");
+                        bio = scan.nextLine();
+                    } while (!(bio.length() <= 160));
+                    ObjectStream.WRITE(String.valueOf(UpdateBio));
+                    ObjectStream.WRITE(bio);
+                    ObjectStream.WRITE(username);
+                }
+                case "5" -> {
+                    System.out.println("write your location :");
+                    ObjectStream.WRITE(String.valueOf(UpdateLocation));
+                    ObjectStream.WRITE(scan.nextLine());
+                    ObjectStream.WRITE(username);
+                }
+                case "6" -> {
+                    System.out.println("write your web address :");
+                    ObjectStream.WRITE(String.valueOf(UpdateWebAddress));
+                    ObjectStream.WRITE(scan.nextLine());
+                    ObjectStream.WRITE(username);
+                }
+                case "7" -> {
+                    System.out.println("Give path of your avatar file like this(c:\\directory\\file_name.jpg) ");
+                    ObjectStream.WRITE(String.valueOf(UpdateAvatar));
+                    ObjectStream.WRITE(scan.nextLine());
+                    ObjectStream.WRITE(username);
+                }
+                case "8" -> {
+                    System.out.println("Give path of your header file like this(c:\\directory\\file_name.jpg) ");
+                    ObjectStream.WRITE(String.valueOf(UpdateHeader));
+                    ObjectStream.WRITE(scan.nextLine());
+                    ObjectStream.WRITE(username);
+                }
+                case "9" -> {
+                    return;
+                }
+            }
+        }
+    }
+
+    public static String getPhoneNumber(ObjectStream stream) {
         Scanner scan = new Scanner(System.in);
         String phone = null;
         System.out.println("enter your phone number :");
         String answer;
-        try {
-            do {
-                phone = scan.nextLine();
-                bufferedWriter.write(("2//" + phone + "\n"));
-                bufferedWriter.flush();
-                answer = bufferedReader.readLine();
-                if (answer.equals("invalid")) System.out.println("phone number is invalid, try again :");
-                if (answer.equals("repeat")) System.out.println("phone number is available, choose another : ");
-            } while (!answer.equals("true"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        do {
+            phone = scan.nextLine();
+            ObjectStream.WRITE(String.valueOf(PhoneNumber));
+            ObjectStream.WRITE((phone));
+            answer = stream.READ();
+            if (answer.equals("invalid")) System.out.println("phone number is invalid, try again :");
+            if (answer.equals("repeat")) System.out.println("phone number is available, choose another : ");
+        } while (!answer.equals("true"));
         return phone;
     }
 
-    public static String getEmail(BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+    public static String getEmail(ObjectStream stream) {
         System.out.println("enter your email :");
         Scanner scan = new Scanner(System.in);
         String answer, email = null;
-        try {
-            do {
-                email = scan.nextLine();
-                bufferedWriter.write(("3//" + email + "\n"));
-                bufferedWriter.flush();
-                answer = bufferedReader.readLine();
-                if (answer.equals("invalid")) System.out.println("email is invalid, try again :");
-                if (answer.equals("repeat")) System.out.println("email is available, choose another : ");
-            } while (!answer.equals("true"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        do {
+            email = scan.nextLine();
+            ObjectStream.WRITE(String.valueOf(Email));
+            ObjectStream.WRITE((email));
+            answer = stream.READ();
+            if (answer.equals("invalid")) System.out.println("email is invalid, try again :");
+            if (answer.equals("repeat")) System.out.println("email is available, choose another : ");
+        } while (!answer.equals("true"));
         return email;
     }
 
-    public static String getPass(BufferedWriter bufferedWriter, BufferedReader bufferedReader) {
+    public static String getPass(ObjectStream stream) {
         boolean checkSame = true, validPass = true;
         Scanner scan = new Scanner(System.in);
         String pass = null, auxPass;
         System.out.println("write a password :");
-        try {
-            do {
-                pass = scan.nextLine();
-                System.out.println("repeat your password :");
-                auxPass = scan.nextLine();
-                bufferedWriter.write(("4//" + pass + "\n"));
-                bufferedWriter.flush();
+        do {
+            pass = scan.nextLine();
+            System.out.println("repeat your password :");
+            auxPass = scan.nextLine();
+            ObjectStream.WRITE(String.valueOf(CheckPass));
+            ObjectStream.WRITE((pass));
+            validPass = stream.READ().equals("true");
+            if (!validPass) System.out.println("invalid password :");
 
-                validPass = bufferedReader.readLine().equals("true");
-                if (!validPass) System.out.println("invalid password :");
-
-                if (validPass) {
-                    if (!pass.equals(auxPass)) {
-                        System.out.println("repeated password is incorrect, try again :");
-                        checkSame = false;
-                    } else checkSame = true;
-                }
-            } while (!validPass || !checkSame);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            if (validPass) {
+                if (!pass.equals(auxPass)) {
+                    System.out.println("repeated password is incorrect, try again :");
+                    checkSame = false;
+                } else checkSame = true;
+            }
+        } while (!validPass || !checkSame);
         return pass;
     }
-
 }
 
