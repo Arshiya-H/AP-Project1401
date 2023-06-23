@@ -1,0 +1,328 @@
+Index: src/UserApplicationSrarter/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package UserApplicationSrarter;\n\nimport Authentication.JWT;\nimport DataBase.DBManager;\n\nimport java.security.InvalidKeyException;\nimport java.security.NoSuchAlgorithmException;\nimport java.security.spec.InvalidKeySpecException;\nimport java.time.LocalDateTime;\nimport java.time.format.DateTimeFormatter;\nimport java.util.Scanner;\nimport java.util.regex.Pattern;\n\npublic class UserController {\n\n    public static void singUp() {\n        String username = null, phone = null, email = null, pass = null, auxPass;\n        Scanner scan = new Scanner(System.in);\n\n        System.out.println(\"enter a user name :\");\n        do {\n            if (username != null) System.out.println(\"the username has existed already, choose another :\");\n            username = scan.nextLine();\n        }\n        while (DBManager.checkUserName(username));\n\n        System.out.println(\"enter your first name :\");\n        String firstname = scan.nextLine();\n\n        System.out.println(\"enter your last name :\");\n        String lastname = scan.nextLine();\n\n        System.out.println(\"choose email(1) or phone(2) or both(3) :\");\n        String choicePhoneOrEmail = scan.nextLine();\n\n        if (choicePhoneOrEmail.equals(\"2\") || choicePhoneOrEmail.equals(\"3\")) {\n            System.out.println(\"enter your phone number :\");\n            do phone = scan.nextLine();\n            while (!checkPhoneNumber(phone) || DBManager.checkPhoneNumber(phone));\n\n        }\n        if (choicePhoneOrEmail.equals(\"1\") || choicePhoneOrEmail.equals(\"3\")) {\n            System.out.println(\"enter your email :\");\n            do email = scan.nextLine();\n            while (!isValidEmail(email) || DBManager.checkEmail(email));\n        }\n\n        do {\n\n            if (pass != null) System.out.println(\"invalid password :\");\n            else System.out.println(\"write a password :\");\n            pass = scan.nextLine();\n\n            System.out.println(\"repeat your password :\");\n            auxPass = scan.nextLine();\n\n        } while (!pass.equals(auxPass) || !checkPass(pass));\n\n        System.out.println(\"enter a country (if you want can see list of country by enter show) :\");\n        String country = scan.nextLine();\n        if (country.equals(\"show\")) {\n            show();\n            country = scan.nextLine();\n        }\n        System.out.println(\"enter your birthdate by this format YYYY/MM/DD :\");\n        String birthDate = scan.nextLine();\n\n        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,\n                LocalDateTime.now().format(DateTimeFormatter.ofPattern(\"yyyy/MM/dd\")),\n                LocalDateTime.now().format(DateTimeFormatter.ofPattern(\"yyyy/MM/dd\")));\n    }\n\n    public static void signIn() {\n        Scanner scan = new Scanner(System.in);\n        String username = null, pass = null, secertyKey;\n        System.out.println(\"enter your username :\");\n\n        do {\n            if (username != null) System.out.println(\"the username has not existed, choose another :\");\n            username = scan.nextLine();\n        }\n        while (!DBManager.checkUserName(username));\n\n        System.out.println(\"enter your password :\");\n        do {\n            if (pass != null) System.out.println(\"invalid pass, try again :\");\n            pass = scan.nextLine();\n        }\n        while (!DBManager.checkPass(username, pass));\n\n\n        do secertyKey = JWT.generateSecurityKey();\n        while (DBManager.checkSecurityKay(secertyKey));\n\n        try {\n            DBManager.updateSecretKeyAndJWT(username, secertyKey, JWT.generateJWT(username, secertyKey));\n        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {\n            e.printStackTrace();\n        }\n\n        ///////////////\n\n    }\n\n    public static void show() {\n        System.out.println(\"\\tlist of country :\\niran\");\n    }\n\n    public static boolean checkPass(String pass) {\n        boolean length = false, upperCase = false, lowerCase = false;\n        for (int i = 0; i < pass.length(); i++) {\n            char ch = pass.charAt(i);\n            if (Character.isUpperCase(ch)) upperCase = true;\n            if (Character.isLowerCase(ch)) lowerCase = true;\n            if (upperCase & lowerCase) break;\n        }\n        if (pass.length() >= 8) length = true;\n        return length & upperCase & length;\n    }\n\n    public static boolean checkPhoneNumber(String phoneNumber) {\n        String[] n = phoneNumber.split(\"\");\n        for (int i = 0; i < phoneNumber.length(); i++)\n            try {\n                int integer = Integer.parseInt(n[i]);\n                if (!(integer >= 0 && integer <= 9)) {\n                    System.out.println(\"invalid phone number, write again :\");\n                    return false;\n                }\n            } catch (Exception e) {\n                System.out.println(\"invalid phone number, write again :\");\n                return false;\n            }\n        if (phoneNumber.length() != 11) {\n            System.out.println(\"invalid phone number, write again :\");\n            return false;\n        }\n        return true;\n    }\n\n    public static boolean isValidEmail(String email) {\n        String regex = \"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$\";\n        Pattern pattern = Pattern.compile(regex);\n        if (pattern.matcher(email).matches()) return true;\n        System.out.println(\"your email is invalid, try again :\");\n        return false;\n    }\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/UserApplicationSrarter/UserController.java b/src/UserApplicationSrarter/UserController.java
+--- a/src/UserApplicationSrarter/UserController.java	(revision d9eddff59af0cd339a4dbfa073bb8878b205b103)
++++ b/src/UserApplicationSrarter/UserController.java	(date 1687523423328)
+@@ -1,29 +1,27 @@
+ package UserApplicationSrarter;
+ 
+-import Authentication.JWT;
+ import DataBase.DBManager;
++import inheritance.ObjectStream;
+ 
+-import java.security.InvalidKeyException;
+-import java.security.NoSuchAlgorithmException;
+-import java.security.spec.InvalidKeySpecException;
+ import java.time.LocalDateTime;
+ import java.time.format.DateTimeFormatter;
+ import java.util.Scanner;
+-import java.util.regex.Pattern;
++
++import static UserApplicationSrarter.ORDER.*;
+ 
+ public class UserController {
+ 
+-    public static void singUp() {
+-        String username = null, phone = null, email = null, pass = null, auxPass;
++    public static void singUp(ObjectStream stream) {
++        String username = null, phone = null, email = null, pass = null;
+         Scanner scan = new Scanner(System.in);
+ 
+         System.out.println("enter a user name :");
+         do {
+             if (username != null) System.out.println("the username has existed already, choose another :");
+             username = scan.nextLine();
+-        }
+-        while (DBManager.checkUserName(username));
+-
++            ObjectStream.WRITE((String.valueOf(CheckUserName)));
++            ObjectStream.WRITE((username));
++        } while (!stream.READ().equals("false"));
+         System.out.println("enter your first name :");
+         String firstname = scan.nextLine();
+ 
+@@ -33,28 +31,13 @@
+         System.out.println("choose email(1) or phone(2) or both(3) :");
+         String choicePhoneOrEmail = scan.nextLine();
+ 
+-        if (choicePhoneOrEmail.equals("2") || choicePhoneOrEmail.equals("3")) {
+-            System.out.println("enter your phone number :");
+-            do phone = scan.nextLine();
+-            while (!checkPhoneNumber(phone) || DBManager.checkPhoneNumber(phone));
+-
+-        }
+-        if (choicePhoneOrEmail.equals("1") || choicePhoneOrEmail.equals("3")) {
+-            System.out.println("enter your email :");
+-            do email = scan.nextLine();
+-            while (!isValidEmail(email) || DBManager.checkEmail(email));
+-        }
++        if (choicePhoneOrEmail.equals("2") || choicePhoneOrEmail.equals("3"))
++            phone = getPhoneNumber(stream);
+ 
+-        do {
++        if (choicePhoneOrEmail.equals("1") || choicePhoneOrEmail.equals("3"))
++            email = getEmail(stream);
+ 
+-            if (pass != null) System.out.println("invalid password :");
+-            else System.out.println("write a password :");
+-            pass = scan.nextLine();
+-
+-            System.out.println("repeat your password :");
+-            auxPass = scan.nextLine();
+-
+-        } while (!pass.equals(auxPass) || !checkPass(pass));
++        pass = getPass(stream);
+ 
+         System.out.println("enter a country (if you want can see list of country by enter show) :");
+         String country = scan.nextLine();
+@@ -65,85 +48,188 @@
+         System.out.println("enter your birthdate by this format YYYY/MM/DD :");
+         String birthDate = scan.nextLine();
+ 
+-        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
+-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
+-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
++        ObjectStream.WRITE(InsertUser + "");
++        ObjectStream.WRITE(username + "//" + firstname + "//" + lastname + "//" + email + "//" + phone + "//" + pass + "//" + country + "//" + birthDate);
++//        DBManager.insertUserToDB(username, firstname, lastname, email, phone, pass, country, birthDate,
++//                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
++//                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
++    }
++
++    public static void show() {
++        System.out.println("\tlist of country :\niran");
+     }
+ 
+-    public static void signIn() {
++    public static void signIn(ObjectStream stream) {
+         Scanner scan = new Scanner(System.in);
+-        String username = null, pass = null, secertyKey;
++        String username = null, pass = null;
+         System.out.println("enter your username :");
+-
+         do {
+             if (username != null) System.out.println("the username has not existed, choose another :");
+             username = scan.nextLine();
+-        }
+-        while (!DBManager.checkUserName(username));
++            ObjectStream.WRITE((String.valueOf(CheckUserName)));
++            ObjectStream.WRITE((username));
++        } while (stream.READ().equals("false"));
+ 
+         System.out.println("enter your password :");
+         do {
+             if (pass != null) System.out.println("invalid pass, try again :");
+             pass = scan.nextLine();
++            ObjectStream.WRITE(String.valueOf(CheckPassSingIn));
++            ObjectStream.WRITE(username);
++            ObjectStream.WRITE(pass);
+         }
+-        while (!DBManager.checkPass(username, pass));
++        while (stream.READ().equals("false"));
+ 
++        ObjectStream.WRITE(String.valueOf(AcceptSignIn));
++        ObjectStream.WRITE(username);
+ 
+-        do secertyKey = JWT.generateSecurityKey();
+-        while (DBManager.checkSecurityKay(secertyKey));
++        afterSignIn(username, stream);
++    }
+ 
+-        try {
+-            DBManager.updateSecretKeyAndJWT(username, secertyKey, JWT.generateJWT(username, secertyKey));
+-        } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
+-            e.printStackTrace();
++    public static void afterSignIn(String username, ObjectStream stream) {
++        Scanner scan = new Scanner(System.in);
++        while (true) {
++            System.out.println("\t1 - log out\n\t2 - edit profile");
++            String order = scan.nextLine();
++            switch (order) {
++                case "1" -> {
++                    stream.WRITE(LOGIUT + "");
++                    stream.WRITE(username);
++                    return;
++                }
++                case "2" -> editProfile(username, stream);
++            }
+         }
++    }
+ 
+-        ///////////////
++    public static void editProfile(String username, ObjectStream stream) {
++        Scanner scan = new Scanner(System.in);
++        while (true) {
++            System.out.println("""
++                    \t1 - enter phone number
++                    \t2 - enter email
++                    \t3 - change password
++                    \t4 - write a bio
++                    \t5 - set location
++                    \t6 - write your web address
++                    \t7 - set avatar
++                    \t8 - set header
++                    \t9 - back""");
+ 
+-    }
+-
+-    public static void show() {
+-        System.out.println("\tlist of country :\niran");
+-    }
+-
+-    public static boolean checkPass(String pass) {
+-        boolean length = false, upperCase = false, lowerCase = false;
+-        for (int i = 0; i < pass.length(); i++) {
+-            char ch = pass.charAt(i);
+-            if (Character.isUpperCase(ch)) upperCase = true;
+-            if (Character.isLowerCase(ch)) lowerCase = true;
+-            if (upperCase & lowerCase) break;
+-        }
+-        if (pass.length() >= 8) length = true;
+-        return length & upperCase & length;
+-    }
+-
+-    public static boolean checkPhoneNumber(String phoneNumber) {
+-        String[] n = phoneNumber.split("");
+-        for (int i = 0; i < phoneNumber.length(); i++)
+-            try {
+-                int integer = Integer.parseInt(n[i]);
+-                if (!(integer >= 0 && integer <= 9)) {
+-                    System.out.println("invalid phone number, write again :");
+-                    return false;
++            switch (scan.nextLine()) {
++                case "1" -> {
++                    String PhoneNumber = getPhoneNumber(stream);
++                    ObjectStream.WRITE(String.valueOf(UpdatePhoneNumber));
++                    ObjectStream.WRITE(PhoneNumber);
++                    ObjectStream.WRITE(username);
++                }
++                case "2" -> {
++                    String Email = getEmail(stream);
++                    ObjectStream.WRITE(String.valueOf(UpdateEmail));
++                    ObjectStream.WRITE(Email);
++                    ObjectStream.WRITE(username);
++                }
++                case "3" -> {
++                    String Pass = getPass(stream);
++                    ObjectStream.WRITE(String.valueOf(UpdatePassword));
++                    ObjectStream.WRITE(Pass);
++                    ObjectStream.WRITE(username);
++                }
++                case "4" -> {
++                    System.out.println("enter your bio (at most character is 160)");
++                    String bio = null;
++                    do {
++                        if (bio != null) System.out.println("your bio is too long,try again by at most 160 character :");
++                        bio = scan.nextLine();
++                    } while (!(bio.length() <= 160));
++                    ObjectStream.WRITE(String.valueOf(UpdateBio));
++                    ObjectStream.WRITE(bio);
++                    ObjectStream.WRITE(username);
++                }
++                case "5" -> {
++                    System.out.println("write your location :");
++                    ObjectStream.WRITE(String.valueOf(UpdateLocation));
++                    ObjectStream.WRITE(scan.nextLine());
++                    ObjectStream.WRITE(username);
+                 }
+-            } catch (Exception e) {
+-                System.out.println("invalid phone number, write again :");
+-                return false;
+-            }
+-        if (phoneNumber.length() != 11) {
+-            System.out.println("invalid phone number, write again :");
+-            return false;
+-        }
+-        return true;
++                case "6" -> {
++                    System.out.println("write your web address :");
++                    ObjectStream.WRITE(String.valueOf(UpdateWebAddress));
++                    ObjectStream.WRITE(scan.nextLine());
++                    ObjectStream.WRITE(username);
++                }
++                case "7" -> {
++                    System.out.println("Give path of your avatar file like this(c:\\directory\\file_name.jpg) ");
++                    ObjectStream.WRITE(String.valueOf(UpdateAvatar));
++                    ObjectStream.WRITE(scan.nextLine());
++                    ObjectStream.WRITE(username);
++                }
++                case "8" -> {
++                    System.out.println("Give path of your header file like this(c:\\directory\\file_name.jpg) ");
++                    ObjectStream.WRITE(String.valueOf(UpdateHeader));
++                    ObjectStream.WRITE(scan.nextLine());
++                    ObjectStream.WRITE(username);
++                }
++                case "9" -> {
++                    return;
++                }
++            }
++        }
++    }
++
++    public static String getPhoneNumber(ObjectStream stream) {
++        Scanner scan = new Scanner(System.in);
++        String phone = null;
++        System.out.println("enter your phone number :");
++        String answer;
++        do {
++            phone = scan.nextLine();
++            ObjectStream.WRITE(String.valueOf(PhoneNumber));
++            ObjectStream.WRITE((phone));
++            answer = stream.READ();
++            if (answer.equals("invalid")) System.out.println("phone number is invalid, try again :");
++            if (answer.equals("repeat")) System.out.println("phone number is available, choose another : ");
++        } while (!answer.equals("true"));
++        return phone;
++    }
++
++    public static String getEmail(ObjectStream stream) {
++        System.out.println("enter your email :");
++        Scanner scan = new Scanner(System.in);
++        String answer, email = null;
++        do {
++            email = scan.nextLine();
++            ObjectStream.WRITE(String.valueOf(Email));
++            ObjectStream.WRITE((email));
++            answer = stream.READ();
++            if (answer.equals("invalid")) System.out.println("email is invalid, try again :");
++            if (answer.equals("repeat")) System.out.println("email is available, choose another : ");
++        } while (!answer.equals("true"));
++        return email;
+     }
+ 
+-    public static boolean isValidEmail(String email) {
+-        String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+-        Pattern pattern = Pattern.compile(regex);
+-        if (pattern.matcher(email).matches()) return true;
+-        System.out.println("your email is invalid, try again :");
+-        return false;
++    public static String getPass(ObjectStream stream) {
++        boolean checkSame = true, validPass = true;
++        Scanner scan = new Scanner(System.in);
++        String pass = null, auxPass;
++        System.out.println("write a password :");
++        do {
++            pass = scan.nextLine();
++            System.out.println("repeat your password :");
++            auxPass = scan.nextLine();
++            ObjectStream.WRITE(String.valueOf(CheckPass));
++            ObjectStream.WRITE((pass));
++            validPass = stream.READ().equals("true");
++            if (!validPass) System.out.println("invalid password :");
++
++            if (validPass) {
++                if (!pass.equals(auxPass)) {
++                    System.out.println("repeated password is incorrect, try again :");
++                    checkSame = false;
++                } else checkSame = true;
++            }
++        } while (!validPass || !checkSame);
++        return pass;
+     }
+ }
+ 
