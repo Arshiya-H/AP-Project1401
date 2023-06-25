@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="fx">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libraries/fx" />
+    </CLASSES>
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/libraries/fx" />
+    </NATIVE>
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libraries/fx" recursive="false" />
+  </library>
+</component>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="adee199b-f9e5-4e34-8584-6cc4e3b79400" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/fx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/jooq.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/libraries/jwt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../UI/UI.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fx/lib.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/beam_sdks_java_io_file_based_io_tests_2_16_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/libraries/beam_sdks_java_io_file_based_io_tests_2_16_0.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/jackson_annotations_2_9_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/libraries/jakarta_xml_bind_api_3_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../AP-Project1401.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../src/AP-Project1401.iml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Rf1nsDtSHfktXBsgamYMRmAQeh" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/mehdinajibpour/PERSONAL/UNIVERSITY/TERM 2/AP-Project1401/libraries",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="adee199b-f9e5-4e34-8584-6cc4e3b79400" name="Changes" comment="" />
+      <created>1687626491676</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1687626491676</updated>
+      <workItem from="1687626497930" duration="11000" />
+      <workItem from="1687679506488" duration="29000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

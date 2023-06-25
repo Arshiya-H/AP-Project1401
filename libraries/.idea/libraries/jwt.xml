@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="jwt">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jwt/jjwt-0.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jwt/jackson-databind-2.9.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jwt/jackson-core-2.9.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jwt/jackson-annotations-2.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
