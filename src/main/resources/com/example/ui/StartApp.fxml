@@ -24,7 +24,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="600.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="3" GridPane.valignment="TOP" />
+            <ImageView fx:id="image" fitHeight="600.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" GridPane.rowSpan="3" GridPane.valignment="TOP" />
             <TextField fx:id="UserName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="User Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets top="120.0" />
@@ -41,7 +41,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#SignIn" prefHeight="50.0" prefWidth="300.0" text="Sign In" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#SignIn" prefHeight="50.0" prefWidth="300.0" text="Sign In" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
                <font>
                   <Font size="25.0" />
                </font>

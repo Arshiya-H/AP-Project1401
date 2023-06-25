@@ -21,8 +21,8 @@ public class StartApplication {
                 System.out.println("\tChoose an option : \n\t\t1 - sign up\n\t\t2 - sign in\n\t\t3 - exit");
                 String sign = scan.nextLine();
                 switch (sign) {
-                    case "1" -> UserController.singUp(stream);
-                    case "2" -> UserController.signIn(stream);
+//                    case "1" -> UserController.singUp(stream);
+//                    case "2" -> UserController.signIn(stream);
                     case "3" -> {
                         return;
                     }

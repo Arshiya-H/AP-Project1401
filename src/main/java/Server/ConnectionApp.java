@@ -66,48 +66,6 @@ public class ConnectionApp extends ObjectStream implements Runnable {
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     }
 
-
-//    public void signUp() {
-//        boolean check = false;
-//        String[] order;
-//        while (socket.isConnected() && !check) {
-//            order = READ().split("//");
-//            switch (order[0]) {
-//                case "1" -> {
-//                    WRITE(checkUserName(order[1]) ? "true\n" : "false\n");
-//                }
-//                case "2" -> {
-//                    phoneNumber(order[1]);
-//                }
-//                case "3" -> {
-//                    email(order[1]);
-//                }
-//                case "4" -> {
-//                    WRITE(checkPass(order[1]) ? "true\n" : "false\n");
-//                }
-//                case "5" -> check = true;
-//            }
-//        }
-//
-//    }
-//
-//    public void signIn() {
-//        boolean check = false;
-//        while (socket.isConnected() && !check) {
-//            String read = READ();
-//            String[] order = read.split("//");
-//            switch (order[0]) {
-//                case "1" -> {
-//                    WRITE(checkUserName(order[1]) ? "true\n" : "false\n");
-//                }
-//                case "2" -> {
-//                    WRITE(DBManager.checkPass(READ(), READ()) + "");
-//                }
-//            }
-//        }
-//        afterSignIn();
-//    }
-
     public static boolean checkUserName(String userName) {
         return DBManager.checkUserName(userName);
     }
@@ -144,7 +102,7 @@ public class ConnectionApp extends ObjectStream implements Runnable {
     public static boolean isValidEmail(String email) {
         String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
-        if (pattern.matcher(email).matches()) return !DBManager.checkEmail(email);
+        if (pattern.matcher(email).matches()) return true;
         return false;
     }
 
