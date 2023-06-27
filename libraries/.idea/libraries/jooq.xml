@@ -1,0 +1,25 @@
+<component name="libraryTable">
+  <library name="jooq">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-codegen-maven-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-jackson-extensions-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-codegen-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jakarta.xml.bind-api-3.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-xtend-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-meta-extensions-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-kotlin-coroutines-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-checker-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-kotlin-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/r2dbc-spi-1.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/reactive-streams-1.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-scala_2.13-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-meta-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-meta-extensions-hibernate-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-postgres-extensions-3.18.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/jooq/jooq-meta-extensions-liquibase-3.18.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
