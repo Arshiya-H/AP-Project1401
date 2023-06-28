@@ -11,7 +11,7 @@ import java.net.Socket;
 
 public class HelloApplication extends Application {
     protected static ObjectStream stream;
-    static Socket socket;
+    protected Socket socket;
 
     @Override
     public void start(Stage stage) throws IOException {

@@ -19,8 +19,8 @@ public class UserController {
 //            if (username != null) System.out.println("the username has existed already, choose another :");
 //            username = scan.nextLine();
 
-        ObjectStream.WRITE((String.valueOf(CheckUserName)));
-        ObjectStream.WRITE((username));
+        stream.WRITE((String.valueOf(CheckUserName)));
+        stream.WRITE((username));
 //        } while (!stream.READ().equals("false"));
         if (!stream.READ().equals("false")) return "the username has existed already, choose another";
 //        System.out.println("enter your first name :");
@@ -70,8 +70,8 @@ public class UserController {
 //        do {
 //        if (username != null) System.out.println("the username has not existed, choose another :");
 //        username = scan.nextLine();
-        ObjectStream.WRITE((String.valueOf(CheckUserName)));
-        ObjectStream.WRITE((UserName));
+        stream.WRITE((String.valueOf(CheckUserName)));
+        stream.WRITE((UserName));
 //        } while (stream.READ().equals("false"));
         if (stream.READ().equals("false")) return "the username has not existed";
 
@@ -79,13 +79,13 @@ public class UserController {
 //        do {
 //            if (pass != null) System.out.println("invalid pass, try again :");
 //            pass = scan.nextLine();
-        ObjectStream.WRITE(String.valueOf(CheckPassSingIn));
-        ObjectStream.WRITE(UserName);
-        ObjectStream.WRITE(Password);
+        stream.WRITE(String.valueOf(CheckPassSingIn));
+        stream.WRITE(UserName);
+        stream.WRITE(Password);
 //        }while (stream.READ().equals("false"));
         if (stream.READ().equals("false")) return "invalid Password, try again";
-        ObjectStream.WRITE(String.valueOf(AcceptSignIn));
-        ObjectStream.WRITE(UserName);
+        stream.WRITE(String.valueOf(AcceptSignIn));
+        stream.WRITE(UserName);
 
 //        afterSignIn(UserName, stream);
         return "true";
@@ -124,21 +124,21 @@ public class UserController {
 //            switch (scan.nextLine()) {
 //                case "1" -> {
 //                    String PhoneNumber = getPhoneNumber(stream);
-//                    ObjectStream.WRITE(String.valueOf(UpdatePhoneNumber));
-//                    ObjectStream.WRITE(PhoneNumber);
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdatePhoneNumber));
+//                    stream.WRITE(PhoneNumber);
+//                    stream.WRITE(username);
 //                }
 //                case "2" -> {
 //                    String Email = getEmail(stream);
-//                    ObjectStream.WRITE(String.valueOf(UpdateEmail));
-//                    ObjectStream.WRITE(Email);
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateEmail));
+//                    stream.WRITE(Email);
+//                    stream.WRITE(username);
 //                }
 //                case "3" -> {
 //                    String Pass = getPass(stream);
-//                    ObjectStream.WRITE(String.valueOf(UpdatePassword));
-//                    ObjectStream.WRITE(Pass);
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdatePassword));
+//                    stream.WRITE(Pass);
+//                    stream.WRITE(username);
 //                }
 //                case "4" -> {
 //                    System.out.println("enter your bio (at most character is 160)");
@@ -147,33 +147,33 @@ public class UserController {
 //                        if (bio != null) System.out.println("your bio is too long,try again by at most 160 character :");
 //                        bio = scan.nextLine();
 //                    } while (!(bio.length() <= 160));
-//                    ObjectStream.WRITE(String.valueOf(UpdateBio));
-//                    ObjectStream.WRITE(bio);
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateBio));
+//                    stream.WRITE(bio);
+//                    stream.WRITE(username);
 //                }
 //                case "5" -> {
 //                    System.out.println("write your location :");
-//                    ObjectStream.WRITE(String.valueOf(UpdateLocation));
-//                    ObjectStream.WRITE(scan.nextLine());
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateLocation));
+//                    stream.WRITE(scan.nextLine());
+//                    stream.WRITE(username);
 //                }
 //                case "6" -> {
 //                    System.out.println("write your web address :");
-//                    ObjectStream.WRITE(String.valueOf(UpdateWebAddress));
-//                    ObjectStream.WRITE(scan.nextLine());
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateWebAddress));
+//                    stream.WRITE(scan.nextLine());
+//                    stream.WRITE(username);
 //                }
 //                case "7" -> {
 //                    System.out.println("Give path of your avatar file like this(c:\\directory\\file_name.jpg) ");
-//                    ObjectStream.WRITE(String.valueOf(UpdateAvatar));
-//                    ObjectStream.WRITE(scan.nextLine());
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateAvatar));
+//                    stream.WRITE(scan.nextLine());
+//                    stream.WRITE(username);
 //                }
 //                case "8" -> {
 //                    System.out.println("Give path of your header file like this(c:\\directory\\file_name.jpg) ");
-//                    ObjectStream.WRITE(String.valueOf(UpdateHeader));
-//                    ObjectStream.WRITE(scan.nextLine());
-//                    ObjectStream.WRITE(username);
+//                    stream.WRITE(String.valueOf(UpdateHeader));
+//                    stream.WRITE(scan.nextLine());
+//                    stream.WRITE(username);
 //                }
 //                case "9" -> {
 //                    return;
@@ -189,8 +189,8 @@ public class UserController {
 //        String answer;
 //        do {
 //            phone = scan.nextLine();
-        ObjectStream.WRITE(String.valueOf(PhoneNumber));
-        ObjectStream.WRITE((phone));
+        stream.WRITE(String.valueOf(PhoneNumber));
+        stream.WRITE((phone));
         String answer = stream.READ();
         if (answer.equals("invalid")) return "phone number is invalid, try again :";
         if (answer.equals("repeat")) return "phone number is available, choose another : ";
@@ -204,8 +204,8 @@ public class UserController {
 //        String answer, email = null;
 //        do {
 //            email = scan.nextLine();
-        ObjectStream.WRITE(String.valueOf(Email));
-        ObjectStream.WRITE((email));
+        stream.WRITE(String.valueOf(Email));
+        stream.WRITE((email));
         String answer = stream.READ();
         if (answer.equals("invalid")) return "email is invalid, try again :";
         if (answer.equals("repeat")) return "email is available, choose another : ";
@@ -222,8 +222,8 @@ public class UserController {
 //            pass = scan.nextLine();
 //            System.out.println("repeat your password :");
 //            auxPass = scan.nextLine();
-        ObjectStream.WRITE(String.valueOf(CheckPass));
-        ObjectStream.WRITE((pass));
+        stream.WRITE(String.valueOf(CheckPass));
+        stream.WRITE((pass));
         validPass = stream.READ().equals("true");
         if (!validPass) return "invalid password :";
 

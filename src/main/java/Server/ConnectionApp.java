@@ -12,38 +12,43 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-public class ConnectionApp extends ObjectStream implements Runnable {
+public class ConnectionApp implements Runnable {
 
     private String JWT;
     private static String userName;
+    private ObjectStream serverObjectStream;
+    private  Socket socket;
 
-    public ConnectionApp(Socket socket) {
-        super(socket);
+    public ConnectionApp(ObjectStream serverObjectStream, Socket socket) {
+        this.serverObjectStream = serverObjectStream;
+        this.socket = socket;
     }
+
+
 
 
     @Override
     public void run() {
         while (socket.isConnected()) {
-            switch (ORDER.valueOf(READ())) {
-                case CheckUserName -> WRITE(checkUserName(READ()) + "");
-                case PhoneNumber -> phoneNumber(READ());
-                case Email -> email(READ());
-                case CheckPass -> WRITE(checkPass(READ()) + "");
+            switch (ORDER.valueOf(serverObjectStream.READ())) {
+                case CheckUserName -> serverObjectStream.WRITE(checkUserName(serverObjectStream.READ()) + "");
+                case PhoneNumber -> phoneNumber(serverObjectStream.READ());
+                case Email -> email(serverObjectStream.READ());
+                case CheckPass -> serverObjectStream.WRITE(checkPass(serverObjectStream.READ()) + "");
                 case InsertUser -> InsertUser();
-                case CheckPassSingIn -> WRITE(DBManager.checkPass(READ(), READ()) + "");
+                case CheckPassSingIn -> serverObjectStream.WRITE(DBManager.checkPass(serverObjectStream.READ(), serverObjectStream.READ()) + "");
                 case AcceptSignIn -> AcceptSingIn();
 
 
-                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(READ(), READ());
-                case UpdateEmail -> DBManager.updateEmail(READ(), READ());
-                case UpdatePassword -> DBManager.updatePassword(READ(), READ());
-                case UpdateBio -> DBManager.updateBio(READ(), READ());
-                case UpdateLocation -> DBManager.updateLocation(READ(), READ());
-                case UpdateWebAddress -> DBManager.updateWebAddress(READ(), READ());
-                case UpdateAvatar -> DBManager.updateAvatarOrHeader(READ(), READ(), "avatar");
-                case UpdateHeader -> DBManager.updateAvatarOrHeader(READ(), READ(), "header");
-                case LOGIUT -> DBManager.updateSecretKeyAndJWT(READ(), null, null);
+                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateEmail -> DBManager.updateEmail(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdatePassword -> DBManager.updatePassword(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateBio -> DBManager.updateBio(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateLocation -> DBManager.updateLocation(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateWebAddress -> DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateAvatar -> DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
+                case UpdateHeader -> DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "header");
+                case LOGIUT -> DBManager.updateSecretKeyAndJWT(serverObjectStream.READ(), null, null);
             }
         }
     }
@@ -53,7 +58,7 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         String secertyKey;
         do secertyKey = Authentication.JWT.generateSecurityKey();
         while (DBManager.checkSecurityKay(secertyKey));
-        userName = READ();
+        userName = serverObjectStream.READ();
         try {
             DBManager.updateSecretKeyAndJWT(userName, secertyKey, Authentication.JWT.generateJWT(userName, secertyKey));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
@@ -62,7 +67,7 @@ public class ConnectionApp extends ObjectStream implements Runnable {
     }
 
     public void InsertUser() {
-        String[] in = READ().split("//");
+        String[] in = serverObjectStream.READ().split("//");
         DBManager.insertUserToDB(in[0], in[1], in[2], in[3], in[4], in[5], in[6], in[7],
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")),
                 LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
@@ -108,27 +113,27 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         return false;
     }
 
-    public static void phoneNumber(String phoneNumber) {
+    public void phoneNumber(String phoneNumber) {
         if (!checkPhoneNumber(phoneNumber)) {
-            WRITE("invalid");
+            serverObjectStream.WRITE("invalid");
             return;
         }
         if (DBManager.checkPhoneNumber(phoneNumber)) {
-            WRITE("repeat");
+            serverObjectStream.WRITE("repeat");
             return;
         }
-        WRITE("true");
+        serverObjectStream.WRITE("true");
     }
 
-    public static void email(String email) {
+    public void email(String email) {
         if (!isValidEmail(email)) {
-            WRITE("invalid");
+            serverObjectStream.WRITE("invalid");
             return;
         }
         if (DBManager.checkEmail(email)) {
-            WRITE("repeat");
+            serverObjectStream.WRITE("repeat");
             return;
         }
-        WRITE("true");
+        serverObjectStream.WRITE("true");
     }
 }

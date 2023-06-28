@@ -109,8 +109,8 @@ public class SignUpController implements Initializable {
             Label.setText("Birth Date must not be empty");
             return;
         }
-        ObjectStream.WRITE(InsertUser + "");
-        ObjectStream.WRITE(UserName.getText() + "//" + FirstName.getText() + "//" + LastName.getText() + "//" + Email.getText() + "//" + PhoneNumber.getText() + "//" + Password.getText() + "//" + Country.getValue() + "//" + BirthDate.getText());
+        stream.WRITE(InsertUser + "");
+        stream.WRITE(UserName.getText() + "//" + FirstName.getText() + "//" + LastName.getText() + "//" + Email.getText() + "//" + PhoneNumber.getText() + "//" + Password.getText() + "//" + Country.getValue() + "//" + BirthDate.getText());
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("StartApp.fxml"));

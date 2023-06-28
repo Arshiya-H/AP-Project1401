@@ -80,7 +80,7 @@
                   <Font size="20.0" />
                </font>
             </TextField>
-            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#CreateSignUp" prefHeight="40.0" prefWidth="100.0" styleClass="loader" stylesheets="@../../../css/butten%20Sign%20Up%20Create.css" text="CREATE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#CreateSignUp" prefHeight="40.0" prefWidth="100.0" styleClass="loader" text="CREATE" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="25.0" />
                </GridPane.margin>

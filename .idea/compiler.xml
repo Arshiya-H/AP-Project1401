@@ -7,7 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ui" />
+        <module name="AP-Project1401" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AP-Project1401" target="19" />
+      <module name="ui" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
