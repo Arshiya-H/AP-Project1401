@@ -1,10 +1,12 @@
 package Tweet;
 
+import java.io.Serializable;
+
 /**
  * type field shows that what kind of tweet it is
  * it can be : "tweet", "retweet", "quote" and "reply"
  */
-public class Tweet {
+public class Tweet implements Serializable {
 
     private String text;
     private byte[] image;
@@ -16,4 +18,11 @@ public class Tweet {
     private String tweetOwnerUsername;
     private String tweetType;
     private String hashtag;
+
+    public Tweet(String text) {
+        this.text = text;
+    }
+    public String getText() {
+        return text;
+    }
 }

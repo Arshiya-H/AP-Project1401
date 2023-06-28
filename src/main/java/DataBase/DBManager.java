@@ -80,6 +80,21 @@ public class DBManager {
         }
     }
 
+    // A table in database for handling following ande followers:
+    public static void creatFollowingTable() {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        DB.createTableIfNotExists("Followings")
+                .column("userName", VARCHAR(255))
+                .column("userNameFollowed", VARCHAR(255))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     //------------------------------------------------------------------------------------
     // Insert Data:
     public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
@@ -100,26 +115,23 @@ public class DBManager {
         }
     }
 
-    public static void insertTweetToDB(String text, byte[] image, byte[] video, int likeNumber, int reTweetNumber
-            , int replyNumber,int parentTweetId, String sendingDate,String sendingTime, String tweetOwnerUsername, String tweetType , String hashtag) {
+    public static void insertTweetToDB(String text, byte[] image, byte[] video, int parentTweetId, String sendingDate
+            ,String sendingTime, String tweetOwnerUsername, String tweetType , String hashtag) {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
 
         try {
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO Tweets(likeNumber, reTweetNumber, replyNumber" +
-                    ",parentTweetId,sendingDate,tweetOwnerUsername,tweetType,text,image,video,hashtag,sendingTime) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
-            statement.setInt(1,likeNumber);
-            statement.setInt(2,reTweetNumber);
-            statement.setInt(3,replyNumber);
-            statement.setInt(4,parentTweetId);
-            statement.setString(5,sendingDate);
-            statement.setString(6,tweetOwnerUsername);
-            statement.setString(7,tweetType);
-            statement.setString(8,text);
-            statement.setBytes(9,image);
-            statement.setBytes(10,video);
-            statement.setString(11,hashtag);
-            statement.setString(12,sendingTime);
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Tweets(parentTweetId,sendingDate,sendingTime,tweetOwnerUsername,tweetType,text,image,video,hashtag) VALUES(?,?,?,?,?,?,?,?,?)");
+
+            statement.setInt(1,parentTweetId);
+            statement.setString(2,sendingDate);
+            statement.setString(3,sendingTime);
+            statement.setString(4,tweetOwnerUsername);
+            statement.setString(5,tweetType);
+            statement.setString(6,text);
+            statement.setBytes(7,image);
+            statement.setBytes(8,video);
+            statement.setString(9,hashtag);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -133,22 +145,6 @@ public class DBManager {
         }
     }
 
-    //------------------------------------------------------------------------------------
-    // A table in database for handling following ande followers:
-    public static void creatFollowingTable() {
-        DBConnection dbConnection = new DBConnection();
-        DSLContext DB = dbConnection.getDB();
-
-        DB.createTableIfNotExists("Followings")
-                .column("userName", VARCHAR(255))
-                .column("userNameFollowed", VARCHAR(255))
-                .execute();
-        try {
-            dbConnection.getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
     //------------------------------------------------------------------------------------
     //If you want to follow:
 

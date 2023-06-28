@@ -19,6 +19,7 @@ public class Server {
     public static void main(String[] args) throws IOException {
         DBManager.creatUsersTable();
         DBManager.creatFollowingTable();
+        DBManager.creatTweetsTable();
         ServerSocket ServerSocket = new ServerSocket(2000);
         Server Server = new Server(ServerSocket);
         try {

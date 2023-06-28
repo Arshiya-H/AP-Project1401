@@ -1,6 +1,7 @@
 package Server;
 
 import DataBase.DBManager;
+import Tweet.Tweet;
 import UserApplicationSrarter.ORDER;
 import Inheritance.ObjectStream;
 
@@ -8,14 +9,19 @@ import java.net.Socket;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConnectionApp implements Runnable {
 
     private String JWT;
-    private static String userName;
+    private String userName;
     private ObjectStream serverObjectStream;
     private  Socket socket;
 
@@ -38,6 +44,7 @@ public class ConnectionApp implements Runnable {
                 case InsertUser -> InsertUser();
                 case CheckPassSingIn -> serverObjectStream.WRITE(DBManager.checkPass(serverObjectStream.READ(), serverObjectStream.READ()) + "");
                 case AcceptSignIn -> AcceptSingIn();
+                case CreateTweet -> insertTweet(serverObjectStream.readTweet());
 
 
                 case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
@@ -135,5 +142,36 @@ public class ConnectionApp implements Runnable {
             return;
         }
         serverObjectStream.WRITE("true");
+    }
+    //-----------------------------------------------------------------------------------------
+    // Tweet things:
+    private String[] getCurrentTime(){
+        Date date = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String formattedDate = dateFormatter.format(date);
+        System.out.println(formattedDate);
+        String[] splittedDate = formattedDate.split(" ");
+        return splittedDate;
+    }
+    private String extractHashtags(String message) {
+        List<String> hashtags = new ArrayList<>();
+        Pattern pattern = Pattern.compile("#\\w+");
+        Matcher matcher = pattern.matcher(message);
+
+        while (matcher.find()) {
+            hashtags.add(matcher.group());
+        }
+        String temp = "";
+        for (String sa : hashtags) {
+            temp = temp.concat(sa + " ");
+        }
+
+        return temp;
+    }
+    public void insertTweet(Tweet tweet){
+        String text = tweet.getText();
+        String[] timeAndDate = getCurrentTime();
+        String hashtags = extractHashtags(text);
+        DBManager.insertTweetToDB(text,null,null,-1,timeAndDate[0],timeAndDate[1],userName,"tweet",hashtags );
     }
 }
