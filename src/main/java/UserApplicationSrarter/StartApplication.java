@@ -1,6 +1,6 @@
 package UserApplicationSrarter;
 
-import inheritance.ObjectStream;
+import Inheritance.ObjectStream;
 
 import java.io.IOException;
 import java.net.Socket;

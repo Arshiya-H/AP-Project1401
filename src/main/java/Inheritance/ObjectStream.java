@@ -1,4 +1,4 @@
-package inheritance;
+package Inheritance;
 
 import java.io.*;
 import java.net.Socket;

@@ -1,9 +1,8 @@
 package com.example.ui;
 
-import inheritance.ObjectStream;
+import Inheritance.ObjectStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

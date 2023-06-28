@@ -2,7 +2,7 @@ package Server;
 
 import DataBase.DBManager;
 import UserApplicationSrarter.ORDER;
-import inheritance.ObjectStream;
+import Inheritance.ObjectStream;
 
 import java.net.Socket;
 import java.security.InvalidKeyException;
@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 public class ConnectionApp extends ObjectStream implements Runnable {
 
     private String JWT;
+    private static String userName;
 
     public ConnectionApp(Socket socket) {
         super(socket);
@@ -32,6 +33,7 @@ public class ConnectionApp extends ObjectStream implements Runnable {
                 case InsertUser -> InsertUser();
                 case CheckPassSingIn -> WRITE(DBManager.checkPass(READ(), READ()) + "");
                 case AcceptSignIn -> AcceptSingIn();
+
 
                 case UpdatePhoneNumber -> DBManager.updatePhoneNumber(READ(), READ());
                 case UpdateEmail -> DBManager.updateEmail(READ(), READ());
@@ -51,9 +53,9 @@ public class ConnectionApp extends ObjectStream implements Runnable {
         String secertyKey;
         do secertyKey = Authentication.JWT.generateSecurityKey();
         while (DBManager.checkSecurityKay(secertyKey));
-        String Username = READ();
+        userName = READ();
         try {
-            DBManager.updateSecretKeyAndJWT(Username, secertyKey, Authentication.JWT.generateJWT(Username, secertyKey));
+            DBManager.updateSecretKeyAndJWT(userName, secertyKey, Authentication.JWT.generateJWT(userName, secertyKey));
         } catch (NoSuchAlgorithmException | InvalidKeySpecException | InvalidKeyException e) {
             e.printStackTrace();
         }

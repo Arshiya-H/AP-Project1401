@@ -1,10 +1,7 @@
 package UserApplicationSrarter;
 
-import DataBase.DBManager;
-import inheritance.ObjectStream;
+import Inheritance.ObjectStream;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static UserApplicationSrarter.ORDER.*;
@@ -62,9 +59,9 @@ public class UserController {
 
     }
 
-    public static void show() {
-        System.out.println("\tlist of country :\niran");
-    }
+//    public static void show() {
+//        System.out.println("\tlist of country :\niran");
+//    }
 
     public static String signIn(ObjectStream stream, String UserName, String Password) {
 //        Scanner scan = new Scanner(System.in);
