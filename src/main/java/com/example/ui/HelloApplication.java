@@ -1,9 +1,8 @@
 package com.example.ui;
 
-import inheritance.ObjectStream;
+import Inheritance.ObjectStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,7 +11,7 @@ import java.net.Socket;
 
 public class HelloApplication extends Application {
     protected static ObjectStream stream;
-    static Socket socket;
+    protected Socket socket;
 
     @Override
     public void start(Stage stage) throws IOException {

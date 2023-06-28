@@ -56,6 +56,83 @@ public class DBManager {
         }
     }
 
+    /**
+     * A table for saving tweets
+     * note: if "parentTweetId" be -1 means it has no parent and, it is a pure tweet
+     * */
+    public static void creatTweetsTable() {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS Tweets (id INTEGER PRIMARY KEY, likeNumber INTEGER DEFAULT 0" +
+                    ", reTweetNumber INTEGER DEFAULT 0, replyNumber INTEGER DEFAULT 0, parentTweetId INTEGER, sendingDate TEXT,sendingTime TEXT,tweetOwnerUsername TEXT, tweetType TEXT" +
+                    ",text TEXT,image BLOB, video BLOB, hashtag TEXT)");
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    //------------------------------------------------------------------------------------
+    // Insert Data:
+    public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
+            , String country, String birthDate, String inComeDate, String lastChangeDate) {
+
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+
+        DB.insertInto(table("Users"), field("userName"), field("firstName"), field("lastName"), field("email"),
+                        field("phoneNumber"), field("password"), field("country"), field("birthDate"), field("inComeDate"),
+                        field("lastChangeDate"))
+                .values(userName, firstName, lastName, email, phoneNumber, password, country, birthDate, inComeDate, lastChangeDate).execute();
+
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void insertTweetToDB(String text, byte[] image, byte[] video, int likeNumber, int reTweetNumber
+            , int replyNumber,int parentTweetId, String sendingDate,String sendingTime, String tweetOwnerUsername, String tweetType , String hashtag) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO Tweets(likeNumber, reTweetNumber, replyNumber" +
+                    ",parentTweetId,sendingDate,tweetOwnerUsername,tweetType,text,image,video,hashtag,sendingTime) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
+            statement.setInt(1,likeNumber);
+            statement.setInt(2,reTweetNumber);
+            statement.setInt(3,replyNumber);
+            statement.setInt(4,parentTweetId);
+            statement.setString(5,sendingDate);
+            statement.setString(6,tweetOwnerUsername);
+            statement.setString(7,tweetType);
+            statement.setString(8,text);
+            statement.setBytes(9,image);
+            statement.setBytes(10,video);
+            statement.setString(11,hashtag);
+            statement.setString(12,sendingTime);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
     //------------------------------------------------------------------------------------
     // A table in database for handling following ande followers:
     public static void creatFollowingTable() {
@@ -303,26 +380,6 @@ public class DBManager {
         }
         return false;
     }
-
-    // Insert Date:
-    public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
-            , String country, String birthDate, String inComeDate, String lastChangeDate) {
-
-        DBConnection dbConnection = new DBConnection();
-        DSLContext DB = dbConnection.getDB();
-
-        DB.insertInto(table("Users"), field("userName"), field("firstName"), field("lastName"), field("email"),
-                        field("phoneNumber"), field("password"), field("country"), field("birthDate"), field("inComeDate"),
-                        field("lastChangeDate"))
-                .values(userName, firstName, lastName, email, phoneNumber, password, country, birthDate, inComeDate, lastChangeDate).execute();
-
-        try {
-            dbConnection.getConnection().close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void updateSecretKeyAndJWT(String userName, String secretKey, String jwt) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
@@ -444,7 +501,6 @@ public class DBManager {
         }
         return false;
     }
-
 
     // subject : is the field we want to change (header or avatar)
     //       ************** Attention!! **************

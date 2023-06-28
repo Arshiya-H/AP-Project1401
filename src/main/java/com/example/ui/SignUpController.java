@@ -1,28 +1,22 @@
 package com.example.ui;
 
 import UserApplicationSrarter.UserController;
-import inheritance.ObjectStream;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import Inheritance.ObjectStream;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.Delayed;
 
 import static UserApplicationSrarter.ORDER.InsertUser;
 import static com.example.ui.HelloApplication.stream;
@@ -115,8 +109,8 @@ public class SignUpController implements Initializable {
             Label.setText("Birth Date must not be empty");
             return;
         }
-        ObjectStream.WRITE(InsertUser + "");
-        ObjectStream.WRITE(UserName.getText() + "//" + FirstName.getText() + "//" + LastName.getText() + "//" + Email.getText() + "//" + PhoneNumber.getText() + "//" + Password.getText() + "//" + Country.getValue() + "//" + BirthDate.getText());
+        stream.WRITE(InsertUser + "");
+        stream.WRITE(UserName.getText() + "//" + FirstName.getText() + "//" + LastName.getText() + "//" + Email.getText() + "//" + PhoneNumber.getText() + "//" + Password.getText() + "//" + Country.getValue() + "//" + BirthDate.getText());
 
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("StartApp.fxml"));
