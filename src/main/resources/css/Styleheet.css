@@ -1,0 +1,57 @@
+.parent {
+    -fx-background-color: transparent;
+}
+
+.pane {
+    -fx-background-color: #2196f3;
+}
+
+.trans-btn-white-border {
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: whitesmoke;
+}
+
+.white-pane {
+    -fx-background-color: #ffffff;
+}
+
+.blue-panel {
+    -fx-background-color: #151928;
+}
+
+.tf_box {
+    -fx-background-color: transparent;
+    -fx-border-color: #a8a8ba;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-text-fill: #fcfcfc;
+}
+
+.tf_box_country_sign_up {
+    -fx-background-color: transparent;
+    -fx-border-color: #fcfcfc;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-text-fill: #fcfcfc;
+}
+
+.image-view {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+    -fx-stroke-width: 2.0;
+    -fx-border-radius: 20 20 20 20;
+    -fx-background-radius: 10 10 10 10;
+    -fx-padding: 10;
+    -fx-background-color: firebrick;
+}
+
+.tf_box {
+    -fx-background-color: transparent;
+}
+
+.blue-btn {
+    -fx-background-color: #2196f3;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #ffffff;
+}

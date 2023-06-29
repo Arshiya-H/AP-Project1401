@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="480.0" styleClass="trans-btn-white-border" stylesheets="@../../../css/Styleheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.TweetPage">
+   <children>
+      <Circle fx:id="circleIProfile" fill="DODGERBLUE" layoutX="160.0" layoutY="179.0" radius="50.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Label fx:id="fullName" layoutX="55.0" layoutY="10.0" prefHeight="40.0" prefWidth="400.0" text="Full Name" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="userName" layoutX="65.0" layoutY="20.0" prefHeight="40.0" prefWidth="400.0" text="\@userName" textFill="#837f7f" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="50.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="text" layoutX="122.0" layoutY="123.0" prefHeight="180.0" prefWidth="400.0" text="text : sacklnrwegjnwetpfknarsv\nmvlknsdlvnsdklnvasdv\n;knadnva;d" wrapText="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="110.0" />
+      <Label layoutX="75.0" layoutY="180.0" prefHeight="40.0" prefWidth="200.0" text="date" textFill="#837f7f" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="295.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="190.0" prefHeight="40.0" prefWidth="200.0" text="likes | retweet" AnchorPane.leftAnchor="330.0" AnchorPane.topAnchor="295.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ButtonBar layoutX="144.0" layoutY="355.0" prefHeight="40.0" prefWidth="280.0" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="345.0">
+        <buttons>
+          <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="8.0" prefWidth="100.0" text="qute" textAlignment="CENTER" />
+            <Button mnemonicParsing="false" text="retweet" />
+            <Button mnemonicParsing="false" text="like" />
+        </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>

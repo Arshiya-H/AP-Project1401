@@ -192,8 +192,8 @@ public class UserController {
         stream.WRITE(String.valueOf(PhoneNumber));
         stream.WRITE((phone));
         String answer = stream.READ();
-        if (answer.equals("invalid")) return "phone number is invalid, try again :";
-        if (answer.equals("repeat")) return "phone number is available, choose another : ";
+        if (answer.equals("invalid")) return "phone number is invalid, try again";
+        if (answer.equals("repeat")) return "phone number is available, choose another";
 //        } while (!answer.equals("true"));
         return "true";
     }
@@ -207,8 +207,8 @@ public class UserController {
         stream.WRITE(String.valueOf(Email));
         stream.WRITE((email));
         String answer = stream.READ();
-        if (answer.equals("invalid")) return "email is invalid, try again :";
-        if (answer.equals("repeat")) return "email is available, choose another : ";
+        if (answer.equals("invalid")) return "email is invalid, try again";
+        if (answer.equals("repeat")) return "email is available, choose another";
 //        } while (!answer.equals("true"));
         return "true";
     }
@@ -225,9 +225,9 @@ public class UserController {
         stream.WRITE(String.valueOf(CheckPass));
         stream.WRITE((pass));
         validPass = stream.READ().equals("true");
-        if (!validPass) return "invalid password :";
+        if (!validPass) return "invalid password";
 
-        if (validPass) if (!pass.equals(repeatPass)) return "repeated password is incorrect, try again :";
+        if (validPass) if (!pass.equals(repeatPass)) return "repeated password is incorrect, try again";
 
 //    } while(!validPass ||!checkSame);
         return "true";

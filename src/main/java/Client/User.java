@@ -41,7 +41,7 @@ public class User {
     }
 
     public void setCountry(String country) {
-        Country = country;
+        Country = Country;
     }
 
     public void setLastChangeDate(LocalDateTime lastChangeDate) {

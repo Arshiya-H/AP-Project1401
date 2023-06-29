@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -24,11 +25,6 @@ import static com.example.ui.HelloApplication.stream;
 
 public class SignUpController implements Initializable {
 
-    @FXML
-    private TextField BirthDate;
-
-    @FXML
-    private ChoiceBox<String> Country;
 
     private String[] CountryList = {"Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua & Deps", "Argentina",
             "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",
@@ -53,25 +49,35 @@ public class SignUpController implements Initializable {
             , "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"};
 
     @FXML
-    private TextField Email;
+    private TextField birthdate;
 
     @FXML
-    private ImageView Image;
-    @FXML
-    private Label Label;
-    @FXML
-    private TextField LastName;
-    @FXML
-    private TextField FirstName;
+    private ChoiceBox<String> country;
 
     @FXML
-    private TextField Password;
+    private TextField email;
+
     @FXML
-    private TextField RepeatPassword;
+    private TextField firstName;
+
     @FXML
-    private TextField PhoneNumber;
+    private Label lableAnwser;
+
     @FXML
-    private TextField UserName;
+    private TextField lastname;
+
+    @FXML
+    private TextField phoneNumber;
+
+    @FXML
+    private TextField password;
+
+    @FXML
+    private TextField repeatPassword;
+
+    @FXML
+    private TextField userName;
+
 
     private Stage stage;
 
@@ -87,45 +93,41 @@ public class SignUpController implements Initializable {
 
     @FXML
     void CreateSignUp(ActionEvent event) throws IOException {
-        Label.setText("");
-        String awnser = UserController.singUp(stream, UserName.getText(), PhoneNumber.getText(), Email.getText(), Password.getText(), RepeatPassword.getText());
+        lableAnwser.setText("");
+        String awnser = UserController.singUp(stream, userName.getText(), phoneNumber.getText(), email.getText(), password.getText(), repeatPassword.getText());
         if (!awnser.equals("true")) {
-            Label.setText(awnser);
+            lableAnwser.setText("! " + awnser + " !");
             return;
         }
-        if (FirstName.getText().equals("")) {
-            Label.setText("First Name must not be empty");
+        if (firstName.getText().equals("")) {
+            lableAnwser.setText("First Name must not be empty");
             return;
         }
-        if (LastName.getText().equals("")) {
-            Label.setText("Last Name must not be empty");
+        if (lastname.getText().equals("")) {
+            lableAnwser.setText("Last Name must not be empty");
             return;
         }
-        if (Country.getValue().equals("CHOOSE A COUNTRY")) {
-            Label.setText("you must choose a country");
+        if (country.getValue().equals("CHOOSE A COUNTRY")) {
+            lableAnwser.setText("you must choose a country");
             return;
         }
-        if (BirthDate.getText().equals("")) {
-            Label.setText("Birth Date must not be empty");
+        if (birthdate.getText().equals("")) {
+            lableAnwser.setText("Birth Date must not be empty");
             return;
         }
         stream.WRITE(InsertUser + "");
-        stream.WRITE(UserName.getText() + "//" + FirstName.getText() + "//" + LastName.getText() + "//" + Email.getText() + "//" + PhoneNumber.getText() + "//" + Password.getText() + "//" + Country.getValue() + "//" + BirthDate.getText());
+        stream.WRITE(userName.getText() + "//" + firstName.getText() + "//" + lastname.getText() + "//" + email.getText() + "//" + phoneNumber.getText() + "//" + password.getText() + "//" + country.getValue() + "//" + birthdate.getText());
 
-
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("StartApp.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+        lableAnwser.setText("# accept #");
 
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Country.getItems().addAll(CountryList);
-        Country.setValue("CHOOSE A COUNTRY");
+        country.setValue("CHOOSE A COUNTRY");
+        country.getItems().addAll(CountryList);
     }
+
+
 }

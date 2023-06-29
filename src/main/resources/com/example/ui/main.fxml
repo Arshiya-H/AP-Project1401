@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="680.0" prefWidth="980.0" styleClass="pane" stylesheets="@../../../css/Styleheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.mainController">
+   <children>
+      <HBox alignment="CENTER" layoutX="167.0" layoutY="158.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox maxWidth="280.0" prefHeight="680.0" prefWidth="280.0" styleClass="blue-btn" HBox.hgrow="ALWAYS">
+               <children>
+                  <Pane maxHeight="280.0" maxWidth="280.0" prefHeight="280.0" prefWidth="280.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ImageView fx:id="Header" fitHeight="280.0" fitWidth="280.0" pickOnBounds="true" smooth="false" style="-fx-opacity: 0.2;">
+                           <image>
+                              <Image url="@../../../../../../../../../../Desktop/pngwing.com.png" />
+                           </image>
+                        </ImageView>
+                        <Circle fx:id="CircleAvatar" fill="DODGERBLUE" layoutX="140.0" layoutY="140.0" radius="80.0" stroke="BLACK" strokeType="INSIDE" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="50.0" />
+                     </VBox.margin>
+                  </Pane>
+               </children>
+            </VBox>
+            <VBox prefHeight="680.0" prefWidth="700.0" styleClass="blue-panel" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
