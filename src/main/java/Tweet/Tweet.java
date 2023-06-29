@@ -7,7 +7,8 @@ import java.io.Serializable;
  * it can be : "tweet", "retweet", "quote" and "reply"
  */
 public class Tweet implements Serializable {
-
+    private int tweetId;
+    private int timeDifference;
     private String text;
     private byte[] image;
     private byte[] video;
