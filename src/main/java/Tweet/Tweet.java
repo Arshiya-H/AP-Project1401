@@ -9,7 +9,9 @@ import java.io.Serializable;
 public class Tweet implements Serializable {
     private int tweetId;
     private int parentTweetId;
-    private int timeDifference;
+    // this field is for when we want to sort tweets we use this field to compare and sort
+    private long minutesDiff;
+    private String timeDifference;
     private String text;
     private byte[] image;
     private byte[] video;
@@ -33,15 +35,31 @@ public class Tweet implements Serializable {
     public String getText() {
         return text;
     }
+    public String getSendingDate() {
+        return sendingDate;
+    }
+    public String getSendingTime() {
+        return sendingTime;
+    }
+
+    public long getMinutesDiff() {
+        return minutesDiff;
+    }
+
     public void setTweetId(int tweetId) {
         this.tweetId = tweetId;
     }
     public void setParentTweetId(int parentTweetId) {
         this.parentTweetId = parentTweetId;
     }
-    public void setTimeDifference(int timeDifference) {
+    public void setTimeDifference(String timeDifference) {
         this.timeDifference = timeDifference;
     }
+
+    public void setMinutesDiff(long minutesDiff) {
+        this.minutesDiff = minutesDiff;
+    }
+
     public void setText(String text) {
         this.text = text;
     }
