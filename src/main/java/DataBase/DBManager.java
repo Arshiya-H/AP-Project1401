@@ -1,5 +1,6 @@
 package DataBase;
 
+import Tweet.Tweet;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 
@@ -59,7 +60,7 @@ public class DBManager {
     /**
      * A table for saving tweets
      * note: if "parentTweetId" be -1 means it has no parent and, it is a pure tweet
-     * */
+     */
     public static void creatTweetsTable() {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
@@ -95,6 +96,7 @@ public class DBManager {
             e.printStackTrace();
         }
     }
+
     //------------------------------------------------------------------------------------
     // Insert Data:
     public static void insertUserToDB(String userName, String firstName, String lastName, String email, String phoneNumber, String password
@@ -116,22 +118,22 @@ public class DBManager {
     }
 
     public static void insertTweetToDB(String text, byte[] image, byte[] video, int parentTweetId, String sendingDate
-            ,String sendingTime, String tweetOwnerUsername, String tweetType , String hashtag) {
+            , String sendingTime, String tweetOwnerUsername, String tweetType, String hashtag) {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
 
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO Tweets(parentTweetId,sendingDate,sendingTime,tweetOwnerUsername,tweetType,text,image,video,hashtag) VALUES(?,?,?,?,?,?,?,?,?)");
 
-            statement.setInt(1,parentTweetId);
-            statement.setString(2,sendingDate);
-            statement.setString(3,sendingTime);
-            statement.setString(4,tweetOwnerUsername);
-            statement.setString(5,tweetType);
-            statement.setString(6,text);
-            statement.setBytes(7,image);
-            statement.setBytes(8,video);
-            statement.setString(9,hashtag);
+            statement.setInt(1, parentTweetId);
+            statement.setString(2, sendingDate);
+            statement.setString(3, sendingTime);
+            statement.setString(4, tweetOwnerUsername);
+            statement.setString(5, tweetType);
+            statement.setString(6, text);
+            statement.setBytes(7, image);
+            statement.setBytes(8, video);
+            statement.setString(9, hashtag);
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -277,8 +279,51 @@ public class DBManager {
         // *******************"NullPointerException"*******************
         return null;
     }
-    //------------------------------------------------------------------------------------
 
+    //------------------------------------------------------------------------------------
+    // Tweet things:
+    public static ArrayList<Tweet> getAllTweets() throws RuntimeException {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM Tweets");
+            ResultSet resultSet = pstmt.executeQuery();
+
+            ArrayList<Tweet> allTweets = new ArrayList<>();
+            while (resultSet.next()) {
+                Tweet tempTweet = new Tweet();
+                tempTweet.setTweetId(resultSet.getInt("id"));
+                tempTweet.setLikeNumber(resultSet.getInt("likeNumber"));
+                tempTweet.setReTweetNumber(resultSet.getInt("reTweetNumber"));
+                tempTweet.setReplyNumber(resultSet.getInt("replyNumber"));
+                tempTweet.setParentTweetId(resultSet.getInt("parentTweetId"));
+                tempTweet.setImage(resultSet.getBytes("image"));
+                tempTweet.setVideo(resultSet.getBytes("video"));
+                tempTweet.setText(resultSet.getString("text"));
+                tempTweet.setSendingDate(resultSet.getString("sendingDate"));
+                tempTweet.setSendingTime(resultSet.getString("sendingTime"));
+                tempTweet.setTweetOwnerUsername(resultSet.getString("tweetOwnerUsername"));
+                tempTweet.setTweetType(resultSet.getString("tweetType"));
+                tempTweet.setHashtag(resultSet.getString("hashtag"));
+                allTweets.add(tempTweet);
+            }
+            return allTweets;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
+
+
+    //------------------------------------------------------------------------------------
 
     /**
      * @return boolean
@@ -376,6 +421,7 @@ public class DBManager {
         }
         return false;
     }
+
     public static void updateSecretKeyAndJWT(String userName, String secretKey, String jwt) {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();

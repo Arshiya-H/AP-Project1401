@@ -21,6 +21,7 @@ public enum ORDER {
     UpdateAvatar,
     UpdateHeader,
     CreateTweet,
+    RefreshTweets,
 
 
 }

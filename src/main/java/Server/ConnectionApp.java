@@ -45,6 +45,7 @@ public class ConnectionApp implements Runnable {
                 case CheckPassSingIn -> serverObjectStream.WRITE(DBManager.checkPass(serverObjectStream.READ(), serverObjectStream.READ()) + "");
                 case AcceptSignIn -> AcceptSingIn();
                 case CreateTweet -> insertTweet(serverObjectStream.readTweet());
+                case RefreshTweets -> refreshTweets();
 
 
                 case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
@@ -173,5 +174,9 @@ public class ConnectionApp implements Runnable {
         String[] timeAndDate = getCurrentTime();
         String hashtags = extractHashtags(text);
         DBManager.insertTweetToDB(text,null,null,-1,timeAndDate[0],timeAndDate[1],userName,"tweet",hashtags );
+    }
+
+    public void refreshTweets(){
+        ArrayList<Tweet> allTweets = DBManager.getAllTweets();
     }
 }
