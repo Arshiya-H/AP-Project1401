@@ -4,6 +4,7 @@ import Tweet.Tweet;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class ObjectStream {
 
@@ -11,8 +12,8 @@ public class ObjectStream {
     protected BufferedWriter bufferedWriter;
     protected BufferedReader bufferedReader;
 
-    private  ObjectOutputStream outputStream;
-    private  ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
+    private ObjectInputStream inputStream;
 
     public ObjectStream(Socket socket) {
         try {
@@ -55,10 +56,11 @@ public class ObjectStream {
             e.printStackTrace();
         }
     }
+
     /**
      * These methods read and write tweets object as an object
-     * */
-    public void writeTweet(Tweet tweet){
+     */
+    public void writeTweet(Tweet tweet) {
         try {
             outputStream.writeObject(tweet);
             outputStream.flush();
@@ -66,18 +68,35 @@ public class ObjectStream {
             e.printStackTrace();
         }
     }
+
     /**
      * Returns Tweet object
-     * */
-    public Tweet readTweet(){
+     */
+    public Tweet readTweet() {
         try {
             return (Tweet) inputStream.readObject();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return null;
+    }
+    public void writeTweetsList(ArrayList<Tweet> massages) {
+        try {
+            outputStream.writeObject(massages);
+            outputStream.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Tweet> readTweetsList() {
+        try {
+            return (ArrayList<Tweet>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String[] READ_SPLIT() {

@@ -180,7 +180,14 @@ public class ConnectionApp implements Runnable {
         String hashtags = extractHashtags(text);
         DBManager.insertTweetToDB(text, null, null, -1, timeAndDate[0], timeAndDate[1], userName, "tweet", hashtags);
     }
+    //-----------------------------------------------------------------------------------------
+    // Methods related to refresh tweets:
 
+    /**
+     * This method get date and time of a tweet which were sent before and saved in db
+     * and then calculate its difference with current time in minute scale and after that
+     * return proper data for "long minutesDiff" and "String timeDifference" fields .
+     */
     private ArrayList<Object> calTimeDifference(String date, String time) {
         String input = date.concat(" " + time);
 
@@ -211,12 +218,18 @@ public class ConnectionApp implements Runnable {
         }
     }
 
+    /**
+     * Set 2 fields of every tweet object:
+     * "String timeDifference" and "long minutesDiff" first on is what we want to show in GUI and
+     * second one is a field which is a criterion for sorting tweets by the time they were sent
+     */
     private ArrayList<Tweet> setTimeDifference(ArrayList<Tweet> allTweets) {
         ArrayList<Tweet> temp = new ArrayList<>();
         for (Tweet tweet : allTweets) {
             ArrayList<Object> times = calTimeDifference(tweet.getSendingDate(), tweet.getSendingTime());
             String timeDifference = (String) times.get(0);
             tweet.setTimeDifference(timeDifference);
+
             long minutes_diff = (long) times.get(1);
             tweet.setMinutesDiff(minutes_diff);
             temp.add(tweet);
@@ -227,7 +240,8 @@ public class ConnectionApp implements Runnable {
     public void refreshTweets() {
         ArrayList<Tweet> allTweets = DBManager.getAllTweets();
         allTweets = setTimeDifference(allTweets);
-
-
+        Comparator<Tweet> timeComparator = Comparator.comparingLong(Tweet::getMinutesDiff);
+        allTweets.sort(timeComparator); // this is list of sorted tweets and is ready to show in timeline
+        serverObjectStream.writeTweetsList(allTweets);
     }
 }
