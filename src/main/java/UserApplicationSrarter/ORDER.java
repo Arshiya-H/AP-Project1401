@@ -22,6 +22,7 @@ public enum ORDER {
     UpdateHeader,
     CreateTweet,
     RefreshTweets,
+    SearchUser,
 
 
 }

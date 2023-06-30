@@ -1,5 +1,6 @@
 package Inheritance;
 
+import Client.User;
 import Tweet.Tweet;
 
 import java.io.*;
@@ -94,6 +95,23 @@ public class ObjectStream {
     public ArrayList<Tweet> readTweetsList() {
         try {
             return (ArrayList<Tweet>) inputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void writeUsersList(ArrayList<User> users) {
+        try {
+            outputStream.writeObject(users);
+            outputStream.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<User> readUsersList() {
+        try {
+            return (ArrayList<User>) inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
