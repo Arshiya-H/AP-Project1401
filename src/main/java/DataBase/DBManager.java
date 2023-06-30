@@ -1,5 +1,6 @@
 package DataBase;
 
+import Client.User;
 import Tweet.Tweet;
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -26,6 +27,7 @@ import static org.jooq.impl.SQLDataType.VARCHAR;
 
 public class DBManager {
 
+    // Tables:
     public static void creatUsersTable() {
         DBConnection dbConnection = new DBConnection();
         DSLContext DB = dbConnection.getDB();
@@ -148,7 +150,7 @@ public class DBManager {
     }
 
     //------------------------------------------------------------------------------------
-    //If you want to follow:
+    // Follow Things:
 
     /**
      * This method is for checking if user we want to follow has already followed or not
@@ -563,6 +565,72 @@ public class DBManager {
                     .execute();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
+        }
+    }
+
+    //------------------------------------------------------------------------------------
+    /**
+     * this method search by username or full name
+     * you should write in of these tho paterns:
+     * "UserName" or "first_name last_name"
+     * */
+    public static ArrayList<User> searchUser(String input) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        String[] splitInput = input.split(" ");
+        int cnt = splitInput.length;
+        PreparedStatement statement = null;
+        try {
+            if (cnt == 1) {
+                // search fo username
+                statement = connection.prepareStatement("SELECT * FROM Users WHERE userName = ?");
+                statement.setString(1, splitInput[0]);
+            } else if (cnt == 2) {
+                // search for first and last names
+                statement = connection.prepareStatement("SELECT * FROM Users WHERE firstName = ? AND lastName = ?");
+                statement.setString(1, splitInput[0]);
+                statement.setString(2, splitInput[1]);
+            }
+
+            ResultSet rs = statement.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                System.out.println("Invalid search!");
+                return null;
+            }
+
+            ArrayList<User> users = new ArrayList<>();
+            while (rs.next()){
+                User tempUser = new User();
+                tempUser.setUserName(rs.getString("userName"));
+                tempUser.setFirstName(rs.getString("firstName"));
+                tempUser.setLastName(rs.getString("lastName"));
+                tempUser.setEmail(rs.getString("email"));
+                tempUser.setPhoneNumber(rs.getString("phoneNumber"));
+                tempUser.setPassword(rs.getString("password"));
+                tempUser.setCountry(rs.getString("country"));
+                tempUser.setBirthDate(rs.getString("birthDate"));
+                tempUser.setInComeDate(rs.getString("inComeDate"));
+                tempUser.setLastChangeDate(rs.getString("lastChangeDate"));
+                tempUser.setBio(rs.getString("bio"));
+                tempUser.setLocation(rs.getString("location"));
+                tempUser.setWebAddress(rs.getString("webAddress"));
+                tempUser.setJWT(rs.getString("JWT"));
+                tempUser.setAvatar(rs.getBytes("avatar"));
+                tempUser.setHeader(rs.getBytes("header"));
+                users.add(tempUser);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package Server;
 
+import Client.User;
 import DataBase.DBManager;
 import Tweet.Tweet;
 import UserApplicationSrarter.ORDER;
@@ -44,6 +45,7 @@ public class ConnectionApp implements Runnable {
                 case AcceptSignIn -> AcceptSingIn();
                 case CreateTweet -> insertTweet(serverObjectStream.readTweet());
                 case RefreshTweets -> refreshTweets();
+                case SearchUser -> searchUser(serverObjectStream.READ());
 
 
                 case UpdatePhoneNumber ->
@@ -243,5 +245,11 @@ public class ConnectionApp implements Runnable {
         Comparator<Tweet> timeComparator = Comparator.comparingLong(Tweet::getMinutesDiff);
         allTweets.sort(timeComparator); // this is list of sorted tweets and is ready to show in timeline
         serverObjectStream.writeTweetsList(allTweets);
+    }
+    //-----------------------------------------------------------------------------------------
+    // Search User:
+    public void searchUser(String input){
+        ArrayList<User> users = DBManager.searchUser(input);
+        serverObjectStream.writeUsersList(users);
     }
 }
