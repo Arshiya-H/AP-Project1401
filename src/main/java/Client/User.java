@@ -1,9 +1,10 @@
 package Client;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class User {
+public class User implements Serializable {
 
     private String UserName;
     private String FirstName;
