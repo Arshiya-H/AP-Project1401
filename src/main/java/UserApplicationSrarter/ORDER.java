@@ -20,6 +20,8 @@ public enum ORDER {
     UpdateWebAddress,
     UpdateAvatar,
     UpdateHeader,
+    CreateTweet,
+    RefreshTweets,
 
 
 }

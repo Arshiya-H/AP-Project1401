@@ -1,6 +1,7 @@
 package Server;
 
 import DataBase.DBManager;
+import Tweet.Tweet;
 import UserApplicationSrarter.ORDER;
 import Inheritance.ObjectStream;
 
@@ -8,23 +9,25 @@ import java.net.Socket;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConnectionApp implements Runnable {
 
     private String JWT;
-    private static String userName;
+    private String userName;
     private ObjectStream serverObjectStream;
-    private  Socket socket;
+    private Socket socket;
 
     public ConnectionApp(ObjectStream serverObjectStream, Socket socket) {
         this.serverObjectStream = serverObjectStream;
         this.socket = socket;
     }
-
-
 
 
     @Override
@@ -36,18 +39,25 @@ public class ConnectionApp implements Runnable {
                 case Email -> email(serverObjectStream.READ());
                 case CheckPass -> serverObjectStream.WRITE(checkPass(serverObjectStream.READ()) + "");
                 case InsertUser -> InsertUser();
-                case CheckPassSingIn -> serverObjectStream.WRITE(DBManager.checkPass(serverObjectStream.READ(), serverObjectStream.READ()) + "");
+                case CheckPassSingIn ->
+                        serverObjectStream.WRITE(DBManager.checkPass(serverObjectStream.READ(), serverObjectStream.READ()) + "");
                 case AcceptSignIn -> AcceptSingIn();
+                case CreateTweet -> insertTweet(serverObjectStream.readTweet());
+                case RefreshTweets -> refreshTweets();
 
 
-                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdatePhoneNumber ->
+                        DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateEmail -> DBManager.updateEmail(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdatePassword -> DBManager.updatePassword(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateBio -> DBManager.updateBio(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateLocation -> DBManager.updateLocation(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateWebAddress -> DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateAvatar -> DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
-                case UpdateHeader -> DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "header");
+                case UpdateWebAddress ->
+                        DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateAvatar ->
+                        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
+                case UpdateHeader ->
+                        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "header");
                 case LOGIUT -> DBManager.updateSecretKeyAndJWT(serverObjectStream.READ(), null, null);
             }
         }
@@ -135,5 +145,89 @@ public class ConnectionApp implements Runnable {
             return;
         }
         serverObjectStream.WRITE("true");
+    }
+
+    //-----------------------------------------------------------------------------------------
+    // Tweet things:
+    private String[] getCurrentTime() {
+        Date date = new Date();
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        String formattedDate = dateFormatter.format(date);
+        System.out.println(formattedDate);
+        String[] splittedDate = formattedDate.split(" ");
+        return splittedDate;
+    }
+
+    private String extractHashtags(String message) {
+        List<String> hashtags = new ArrayList<>();
+        Pattern pattern = Pattern.compile("#\\w+");
+        Matcher matcher = pattern.matcher(message);
+
+        while (matcher.find()) {
+            hashtags.add(matcher.group());
+        }
+        String temp = "";
+        for (String sa : hashtags) {
+            temp = temp.concat(sa + " ");
+        }
+
+        return temp;
+    }
+
+    public void insertTweet(Tweet tweet) {
+        String text = tweet.getText();
+        String[] timeAndDate = getCurrentTime();
+        String hashtags = extractHashtags(text);
+        DBManager.insertTweetToDB(text, null, null, -1, timeAndDate[0], timeAndDate[1], userName, "tweet", hashtags);
+    }
+
+    private ArrayList<Object> calTimeDifference(String date, String time) {
+        String input = date.concat(" " + time);
+
+        // Get current date and time
+        LocalDateTime date_time_obj2 = LocalDateTime.now();
+
+        // Convert date string to LocalDateTime object
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        LocalDateTime date_time_obj1 = LocalDateTime.parse(input, formatter);
+
+        // Calculate time difference
+        Duration duration = Duration.between(date_time_obj1, date_time_obj2);
+        long minutes_diff = duration.toMinutes();
+        ArrayList<Object> times = new ArrayList<>();
+
+        if (minutes_diff <= 59) {
+            times.add("" + minutes_diff + " Minutes ago");
+            times.add(minutes_diff);
+            return times;
+        } else if (minutes_diff <= 1416) {
+            times.add("" + duration.toHours() + " Hours ago");
+            times.add(minutes_diff);
+            return times;
+        } else {
+            times.add(date);
+            times.add(minutes_diff);
+            return times;
+        }
+    }
+
+    private ArrayList<Tweet> setTimeDifference(ArrayList<Tweet> allTweets) {
+        ArrayList<Tweet> temp = new ArrayList<>();
+        for (Tweet tweet : allTweets) {
+            ArrayList<Object> times = calTimeDifference(tweet.getSendingDate(), tweet.getSendingTime());
+            String timeDifference = (String) times.get(0);
+            tweet.setTimeDifference(timeDifference);
+            long minutes_diff = (long) times.get(1);
+            tweet.setMinutesDiff(minutes_diff);
+            temp.add(tweet);
+        }
+        return temp;
+    }
+
+    public void refreshTweets() {
+        ArrayList<Tweet> allTweets = DBManager.getAllTweets();
+        allTweets = setTimeDifference(allTweets);
+
+
     }
 }
