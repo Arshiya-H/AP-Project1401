@@ -29,7 +29,6 @@ public class startController implements Initializable {
     @FXML
     private Pane signUpPane;
 
-
     @FXML
     private Parent fxml;
 
@@ -41,7 +40,6 @@ public class startController implements Initializable {
         ret.widthProperty().bind(vBox.prefWidthProperty());
         ret.heightProperty().bind(vBox.prefHeightProperty());
         vBox.setClip(ret);
-
         signInPane.setOpacity(0);
         TranslateTransition tVbox = new TranslateTransition(Duration.seconds(1), vBox);
         TranslateTransition tVboxAux = new TranslateTransition(Duration.seconds(1), vBoxAux);
@@ -63,7 +61,6 @@ public class startController implements Initializable {
         tVboxAux.setToX(vBox.getLayoutX() * 6.4);
 
         parallelTransition.play();
-//        parallelTransition.setOnFinished((e) -> {
 
         FsUpPane.setToValue(1);
         TsUpPane.setToY(signUpPane.getLayoutY() * -0.2);
@@ -72,11 +69,8 @@ public class startController implements Initializable {
         fVbox.setToValue(1);
         parallelTransition.play();
 
-        parallelTransition.setOnFinished((ex) -> {
-            parallelTransition.getChildren().removeAll();
-        });
+        parallelTransition.setOnFinished((ex) -> parallelTransition.getChildren().removeAll());
         animateChangingLayout("signIn.fxml", false);
-//        });
     }
 
     private void animateChangingLayout(String name, boolean toLeft) {
@@ -100,11 +94,14 @@ public class startController implements Initializable {
         } else {
             Node oldView = vBox.getChildren().get(0);
             fxml.setTranslateX((toLeft ? 1 : -1) * vBox.getPrefWidth());
+            fxml.setOpacity(0);
             vBox.getChildren().add(fxml);
 
             Timeline timeline = new Timeline(
                     new KeyFrame(DURATION, new KeyValue(oldView.translateXProperty(), (toLeft ? -1 : 1) * vBox.getPrefWidth())),
-                    new KeyFrame(DURATION, new KeyValue(fxml.translateXProperty(), 0))
+                    new KeyFrame(DURATION, new KeyValue(fxml.translateXProperty(), 0)),
+                    new KeyFrame(DURATION, new KeyValue(fxml.opacityProperty(), 1)),
+                    new KeyFrame(DURATION, new KeyValue(oldView.opacityProperty(), 0))
             );
             timeline.setOnFinished((a) -> {
                 vBox.getChildren().remove(oldView);
@@ -116,7 +113,6 @@ public class startController implements Initializable {
     @FXML
     public void open_signIn(ActionEvent event) {
         signIn();
-
     }
 
     public void signIn() {
@@ -135,19 +131,18 @@ public class startController implements Initializable {
 
         TsInPane.setToY(signInPane.getLayoutY() * 0.1);
         FsInPane.setToValue(0.5);
-        TsUpPane.setToY(signUpPane.getLayoutY() * -0.1);//
+        TsUpPane.setToY(signUpPane.getLayoutY() * -0.1);
         FsUpPane.setToValue(0.5);
         fVbox.setToValue(0);
         tVbox.setToX(vBox.getLayoutX() * 6.4);
         tVboxAux.setToX(vBox.getLayoutX() * 6.4);
 
         parallelTransition.play();
-//        parallelTransition.setOnFinished((e) -> {
 
         FsUpPane.setToValue(1);
         TsInPane.setToY(signInPane.getLayoutY() * -0.2);
         FsInPane.setToValue(0);
-        TsUpPane.setToY(signUpPane.getLayoutY() * -0.2);//
+        TsUpPane.setToY(signUpPane.getLayoutY() * -0.2);
         tVbox.setToX(vBox.getLayoutX() * 12.8);
         tVboxAux.setToX(vBox.getLayoutX() * 12.8);
         fVbox.setToValue(1);
@@ -156,7 +151,6 @@ public class startController implements Initializable {
             parallelTransition.getChildren().removeAll();
         });
         animateChangingLayout("signIn.fxml", false);
-//        });
     }
 
     @FXML
@@ -173,7 +167,7 @@ public class startController implements Initializable {
 
         parallelTransition.setInterpolator(Interpolator.EASE_BOTH);
 
-        TsUpPane.setToY(signUpPane.getLayoutY() * 0.05);//
+        TsUpPane.setToY(signUpPane.getLayoutY() * 0.05);
         FsUpPane.setToValue(0.5);
         TsInPane.setToY(signInPane.getLayoutY() * 0.2);
         FsInPane.setToValue(0.5);
@@ -183,9 +177,7 @@ public class startController implements Initializable {
 
         parallelTransition.play();
 
-//        parallelTransition.setOnFinished((e) -> {
-
-        TsUpPane.setToY(signUpPane.getLayoutY() * 0.1);//
+        TsUpPane.setToY(signUpPane.getLayoutY() * 0.1);
         FsUpPane.setToValue(0);
         TsInPane.setToY(signInPane.getLayoutY() * 0.4);
         FsInPane.setToValue(1);
@@ -193,11 +185,7 @@ public class startController implements Initializable {
         tVboxAux.setToX(0);
         fVbox.setToValue(1);
         parallelTransition.play();
-        parallelTransition.setOnFinished((ex) -> {
-            parallelTransition.getChildren().removeAll();
-        });
+        parallelTransition.setOnFinished((ex) -> parallelTransition.getChildren().removeAll());
         animateChangingLayout("signUp.fxml", true);
-
-//        });
     }
 }

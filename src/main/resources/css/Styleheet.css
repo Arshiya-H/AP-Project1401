@@ -6,6 +6,45 @@
     -fx-background-color: #2196f3;
 }
 
+.Hbox-search {
+    -fx-background-color: #273052;
+    -fx-background-radius: 25px;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 25px;
+    -fx-border-width: 1px;
+
+}
+
+.menu-bar {
+    -fx-background-color: #2196f3;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #ffffff;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.information-btn {
+    -fx-background-color: transparent;
+    -fx-background-radius: 50px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 50px;
+}
+
+.menu-btn {
+    -fx-background-color: #273052;
+    -fx-background-radius: 50px;
+    -fx-text-fill: #a8a8ba;
+    -fx-border-color: #a8a8ba;
+    -fx-border-radius: 50px;
+}
+
+.header {
+    -fx-background-radius: 0 0 10 10 ;
+    -fx-border-radius: 0 0 10 10;
+}
+
 .trans-btn-white-border {
     -fx-background-color: transparent;
     -fx-background-radius: 5px;
@@ -30,6 +69,14 @@
     -fx-text-fill: #fcfcfc;
 }
 
+.search_box {
+    -fx-background-color: transparent;
+    -fx-border-color: #034680;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
+    -fx-text-fill: #fcfcfc;
+}
+
 .tf_box_country_sign_up {
     -fx-background-color: transparent;
     -fx-border-color: #fcfcfc;
@@ -37,13 +84,9 @@
     -fx-text-fill: #fcfcfc;
 }
 
-.image-view {
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
-    -fx-stroke-width: 2.0;
-    -fx-border-radius: 20 20 20 20;
-    -fx-background-radius: 10 10 10 10;
-    -fx-padding: 10;
-    -fx-background-color: firebrick;
+.Vbox-Hadear_profile {
+    -fx-background-color: #fcfcfc;
+    -fx-background-radius: 50 50 50 50;
 }
 
 .tf_box {
@@ -53,5 +96,11 @@
 .blue-btn {
     -fx-background-color: #2196f3;
     -fx-background-radius: 5px;
+    -fx-text-fill: #ffffff;
+}
+
+.blue-btn-search {
+    -fx-background-color: #034680;
+    -fx-background-radius: 0px 10px 10px 10px;
     -fx-text-fill: #ffffff;
 }

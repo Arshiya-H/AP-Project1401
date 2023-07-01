@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
         socket = new Socket("localhost", 2000);
         stream = new ObjectStream(socket);
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start.fxml"));
-        Scene scene = new Scene( fxmlLoader.load());
+        Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Hello!");
         stage.setScene(scene);
