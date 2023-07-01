@@ -21,6 +21,7 @@ public class Tweet implements Serializable {
     private String sendingDate;
     private String sendingTime;
     private String tweetOwnerUsername;
+    private String tweetOwnerFullName;
     private String tweetType;
     private String hashtag;
 
@@ -44,8 +45,16 @@ public class Tweet implements Serializable {
         return sendingTime;
     }
 
+    public String getTweetOwnerFullName() {
+        return tweetOwnerFullName;
+    }
+
     public long getMinutesDiff() {
         return minutesDiff;
+    }
+
+    public void setTweetOwnerFullName(String tweetOwnerFullName) {
+        this.tweetOwnerFullName = tweetOwnerFullName;
     }
 
     public void setTweetId(int tweetId) {

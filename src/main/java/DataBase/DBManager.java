@@ -69,7 +69,8 @@ public class DBManager {
 
         try {
             PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS Tweets (id INTEGER PRIMARY KEY, likeNumber INTEGER DEFAULT 0" +
-                    ", reTweetNumber INTEGER DEFAULT 0, replyNumber INTEGER DEFAULT 0, parentTweetId INTEGER, sendingDate TEXT,sendingTime TEXT,tweetOwnerUsername TEXT, tweetType TEXT" +
+                    ", reTweetNumber INTEGER DEFAULT 0, replyNumber INTEGER DEFAULT 0, parentTweetId INTEGER, sendingDate TEXT,sendingTime TEXT,tweetOwnerUsername TEXT" +
+                    ",tweetOwnerFullName TEXT, tweetType TEXT" +
                     ",text TEXT,image BLOB, video BLOB, hashtag TEXT)");
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -306,6 +307,7 @@ public class DBManager {
                 tempTweet.setSendingDate(resultSet.getString("sendingDate"));
                 tempTweet.setSendingTime(resultSet.getString("sendingTime"));
                 tempTweet.setTweetOwnerUsername(resultSet.getString("tweetOwnerUsername"));
+                tempTweet.setTweetOwnerFullName(DBManager.returnFullName(resultSet.getString("tweetOwnerUsername")));
                 tempTweet.setTweetType(resultSet.getString("tweetType"));
                 tempTweet.setHashtag(resultSet.getString("hashtag"));
                 allTweets.add(tempTweet);
@@ -439,6 +441,32 @@ public class DBManager {
         }
     }
 
+    public static String returnFullName(String userName){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement("SELECT firstName, lastName FROM Users WHERE userName = ?");
+            pstmt.setString(1, userName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                return firstName.concat(" "+lastName);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
+    }
 
     //------------------------------------------------------------------------------------
 
