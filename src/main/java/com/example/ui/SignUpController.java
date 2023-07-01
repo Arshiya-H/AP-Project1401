@@ -40,25 +40,25 @@ public class SignUpController extends SingInController implements Initializable 
             , "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"};
 
     @FXML
-    private TextField birthdate;
+    protected TextField birthdate;
 
     @FXML
     protected ChoiceBox<String> country;
 
     @FXML
-    private TextField email;
+    protected TextField email;
 
     @FXML
-    private TextField firstName;
+    protected TextField firstName;
 
     @FXML
-    private TextField lastname;
+    protected TextField lastname;
 
     @FXML
-    private TextField phoneNumber;
+    protected TextField phoneNumber;
 
     @FXML
-    private TextField repeatPassword;
+    protected TextField repeatPassword;
 
     @FXML
     private Parent fxml;

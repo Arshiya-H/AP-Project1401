@@ -24,6 +24,4 @@ public enum ORDER {
     RefreshTweets,
     SearchUser,
     SearchHashtags,
-
-
 }
