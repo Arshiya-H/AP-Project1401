@@ -49,14 +49,12 @@ public class ConnectionApp implements Runnable {
                 case SearchHashtags -> searchHashtags(serverObjectStream.READ());
 
 
-                case UpdatePhoneNumber ->
-                        DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateEmail -> DBManager.updateEmail(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdatePassword -> DBManager.updatePassword(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateBio -> DBManager.updateBio(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateLocation -> DBManager.updateLocation(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateWebAddress ->
-                        DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
+                case UpdateWebAddress -> DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
                 case UpdateAvatar ->
                         DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
                 case UpdateHeader ->
@@ -247,13 +245,15 @@ public class ConnectionApp implements Runnable {
         allTweets.sort(timeComparator); // this is list of sorted tweets and is ready to show in timeline
         serverObjectStream.writeTweetsList(allTweets);
     }
+
     //-----------------------------------------------------------------------------------------
     // Search things:
-    public void searchUser(String input){
+    public void searchUser(String input) {
         ArrayList<User> users = DBManager.searchUser(input);
         serverObjectStream.writeUsersList(users);
     }
-    public void searchHashtags(String hashtag){
+
+    public void searchHashtags(String hashtag) {
         ArrayList<Tweet> foundTweets = DBManager.searchHashtags(hashtag);
         serverObjectStream.writeTweetsList(foundTweets);
     }

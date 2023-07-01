@@ -1,5 +1,6 @@
 package com.example.ui;
 
+import Inheritance.ObjectStream;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,12 +8,16 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class testApp extends Application {
-
+    protected static ObjectStream stream;
+    protected Socket socket;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
+        socket = new Socket("localhost", 2000);
+        stream = new ObjectStream(socket);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("sendtweet.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setMinWidth(980);
         stage.setMinHeight(680);

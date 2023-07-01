@@ -55,7 +55,8 @@ public class mainController implements Initializable {
 
     @FXML
     void EditProfileBTN(ActionEvent event) {
-        load("editProfile.fxml");    }
+        load("editProfile.fxml");
+    }
 
     @FXML
     void HashtagStatisticsBTN1(ActionEvent event) {
@@ -84,7 +85,7 @@ public class mainController implements Initializable {
 
     @FXML
     void newTwettBTN(ActionEvent event) {
-
+        load("sendtweet.fxml");
     }
 
     @FXML
@@ -99,7 +100,6 @@ public class mainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         rectangleHeader.setArcWidth(100);
         rectangleHeader.setArcHeight(100);
         Image header = new Image("/Screenshot 2023-06-28 at 4.36.37 PM.png", false);

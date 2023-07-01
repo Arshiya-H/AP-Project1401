@@ -33,16 +33,16 @@ import static com.example.ui.HelloApplication.stream;
 public class SingInController implements Initializable {
 
     @FXML
-    private TextField Password;
+    protected TextField Password;
 
     @FXML
-    private TextField UserName;
+    protected TextField UserName;
     @FXML
-    private GridPane gridPane;
+    protected GridPane gridPane;
 
     @FXML
     private Parent fxml;
-    private final static Duration start_finish = Duration.seconds(0.25);
+    protected final static Duration start_finish = Duration.seconds(0.25);
 
     @FXML
     void SignIn(ActionEvent event) {
@@ -50,7 +50,7 @@ public class SingInController implements Initializable {
         if (awnser.equals("true")) {
             Timeline timeline = new Timeline(
                     new KeyFrame(Duration.seconds(1.5),
-                            e -> animationMassage("accept", true)));
+                            e -> animationMassage("accept", true, true)));
             timeline.setCycleCount(2);
             timeline.play();
             timeline.setOnFinished((a) -> {
@@ -65,13 +65,16 @@ public class SingInController implements Initializable {
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Stage stage1 = new Stage();
                 stage1.setScene(scene);
+                stage1.setMinHeight(680);
+                stage1.setMinWidth(980);
+                stage1.setMaxWidth(980);
                 stage1.show();
                 stage.close();
             });
-        } else animationMassage(awnser, false);
+        } else animationMassage(awnser, false, true);
     }
 
-    public void animationMassage(String text, boolean result) {
+    public void animationMassage(String text, boolean result, boolean toleft) {
         FXMLLoader massage = new FXMLLoader(startController.class.getResource("massageAcceptRefuse.fxml"));
         try {
             fxml = massage.load();
@@ -80,7 +83,7 @@ public class SingInController implements Initializable {
         }
         massageAcceptRefuseController controller = massage.getController();
         controller.setInformation(text, result);
-        gridPane.setTranslateX(gridPane.getPrefWidth() * 0.125);
+        gridPane.setTranslateX(gridPane.getPrefWidth() * (toleft ? 1 : -1) * 0.125);
         gridPane.setOpacity(0);
         gridPane.getChildren().add(fxml);
 
@@ -90,7 +93,7 @@ public class SingInController implements Initializable {
         );
         Timeline freeze = new Timeline(new KeyFrame(Duration.seconds(0.75)));
         Timeline finish = new Timeline(
-                new KeyFrame(start_finish, new KeyValue(gridPane.translateXProperty(), -gridPane.getPrefWidth() * 0.125)),
+                new KeyFrame(start_finish, new KeyValue(gridPane.translateXProperty(), -gridPane.getPrefWidth() * (toleft ? 1 : -1) * 0.125)),
                 new KeyFrame(start_finish, new KeyValue(gridPane.opacityProperty(), 0))
         );
         start.play();

@@ -75,7 +75,8 @@ public class ObjectStream {
      */
     public Tweet readTweet() {
         try {
-            return (Tweet) inputStream.readObject();
+            Tweet tweet = (Tweet) inputStream.readObject();
+            return tweet;
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -83,6 +84,7 @@ public class ObjectStream {
         }
         return null;
     }
+
     public void writeTweetsList(ArrayList<Tweet> massages) {
         try {
             outputStream.writeObject(massages);

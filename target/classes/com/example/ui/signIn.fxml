@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -32,11 +31,6 @@
                         <Insets left="15.0" right="10.0" top="15.0" />
                      </HBox.margin>
                   </TextField>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" smooth="false">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
@@ -46,11 +40,6 @@
                         <Insets left="15.0" right="10.0" top="15.0" />
                      </HBox.margin>
                   </TextField>
-                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" smooth="false">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </ImageView>
                </children>
             </HBox>
             <Button mnemonicParsing="false" onAction="#SignIn" prefHeight="40.0" prefWidth="458.0" styleClass="blue-btn" text="Sign In" VBox.vgrow="ALWAYS">
