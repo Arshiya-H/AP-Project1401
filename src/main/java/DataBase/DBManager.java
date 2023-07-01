@@ -4,6 +4,7 @@ import Client.User;
 import Tweet.Tweet;
 import org.jooq.DSLContext;
 import org.jooq.Record;
+import org.jooq.impl.QOM;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -325,11 +326,12 @@ public class DBManager {
     }
     //------------------------------------------------------------------------------------
     // Search things:
+
     /**
      * this method search by username or full name
      * you should write in one of these two patterns:
      * "UserName" or "first_name last_name"
-     * */
+     */
     public static ArrayList<User> searchUser(String input) {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
@@ -360,7 +362,7 @@ public class DBManager {
             }
 
             ArrayList<User> users = new ArrayList<>();
-            while (rs.next()){
+            while (rs.next()) {
                 User tempUser = new User();
                 tempUser.setUserName(rs.getString("userName"));
                 tempUser.setFirstName(rs.getString("firstName"));
@@ -384,7 +386,7 @@ public class DBManager {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -392,12 +394,13 @@ public class DBManager {
             }
         }
     }
+
     /**
      * this method search by given hashtag
      * you should write in this pattern:
      * "#your_hashtag"
-     * */
-    public static ArrayList<Tweet> searchHashtags(String hashtag){
+     */
+    public static ArrayList<Tweet> searchHashtags(String hashtag) {
         DBConnection dbConnection = new DBConnection();
         Connection connection = dbConnection.getConnection();
 
@@ -430,7 +433,7 @@ public class DBManager {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
+        } finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -602,6 +605,20 @@ public class DBManager {
         DSLContext DB = dbConnection.getDB();
         DB.update(table("Users"))
                 .set(field("location"), location)
+                .where(field("userName").eq(userName))
+                .execute();
+        try {
+            dbConnection.getConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateSubjectUser(String Subject, String userName, String update) {
+        DBConnection dbConnection = new DBConnection();
+        DSLContext DB = dbConnection.getDB();
+        DB.update(table("Users"))
+                .set(field(Subject), update)
                 .where(field("userName").eq(userName))
                 .execute();
         try {

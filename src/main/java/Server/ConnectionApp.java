@@ -48,20 +48,22 @@ public class ConnectionApp implements Runnable {
                 case SearchUser -> searchUser(serverObjectStream.READ());
                 case SearchHashtags -> searchHashtags(serverObjectStream.READ());
 
+                case EditProfile -> EditProfile();
 
-                case UpdatePhoneNumber -> DBManager.updatePhoneNumber(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateEmail -> DBManager.updateEmail(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdatePassword -> DBManager.updatePassword(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateBio -> DBManager.updateBio(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateLocation -> DBManager.updateLocation(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateWebAddress -> DBManager.updateWebAddress(serverObjectStream.READ(), serverObjectStream.READ());
-                case UpdateAvatar ->
-                        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
-                case UpdateHeader ->
-                        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "header");
                 case LOGIUT -> DBManager.updateSecretKeyAndJWT(serverObjectStream.READ(), null, null);
             }
         }
+    }
+
+    public void EditProfile() {
+        DBManager.updateSubjectUser("location", userName, (String) serverObjectStream.READ_OBJECT());
+        DBManager.updateSubjectUser("bio", userName, (String) serverObjectStream.READ_OBJECT());
+        DBManager.updateSubjectUser("webAddress", userName, (String) serverObjectStream.READ_OBJECT());
+        DBManager.updateSubjectUser("lastChangeDate", userName, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+//        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "avatar");
+//        DBManager.updateAvatarOrHeader(serverObjectStream.READ(), serverObjectStream.READ(), "header");
+
+
     }
 
 

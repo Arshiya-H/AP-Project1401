@@ -44,6 +44,22 @@ public class User implements Serializable {
         this.JWT = JWT;
     }
 
+    public User(String userName, String firstName, String lastName, String email, String phoneNumber, String password, String country
+            , String birthDate, String bio, String location, String webAddress) {
+        UserName = userName;
+        FirstName = firstName;
+        LastName = lastName;
+        Email = email;
+        PhoneNumber = phoneNumber;
+        Password = password;
+        Country = country;
+        BirthDate = birthDate;
+        Bio = bio;
+        Location = location;
+        WebAddress = webAddress;
+
+    }
+
     public User() {
     }
 
@@ -122,4 +138,57 @@ public class User implements Serializable {
     public void setHeader(byte[] header) {
         this.header = header;
     }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public String getPhoneNumber() {
+        return PhoneNumber;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public String getBirthDate() {
+        return BirthDate;
+    }
+
+    public String getInComeDate() {
+        return InComeDate;
+    }
+
+    public String getLastChangeDate() {
+        return LastChangeDate;
+    }
+
+    public String getBio() {
+        return Bio;
+    }
+
+    public String getLocation() {
+        return Location;
+    }
+
+    public String getWebAddress() {
+        return WebAddress;
+    }
+
+    public String getJWT() {
+        return JWT;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public byte[] getHeader() {
+        return header;
+    }
 }
+
