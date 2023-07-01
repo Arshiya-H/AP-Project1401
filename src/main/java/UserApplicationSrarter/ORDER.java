@@ -23,6 +23,7 @@ public enum ORDER {
     CreateTweet,
     RefreshTweets,
     SearchUser,
+    SearchHashtags,
 
 
 }
