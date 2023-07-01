@@ -5,97 +5,109 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@../../../css/Styleheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.SignUpController">
-    <children>
-        <Label text="Sign Up" textFill="#2693f3">
-            <font>
-                <Font size="20.0" />
-            </font>
-            <VBox.margin>
-                <Insets left="20.0" />
-            </VBox.margin>
-        </Label>
-        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-            <children>
-                <TextField fx:id="userName" promptText="User  Name" styleClass="tf_box" stylesheets="@../../../css/Styleheet.css" HBox.hgrow="ALWAYS">
-                    <HBox.margin>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.SignUpController">
+   <children>
+      <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="480.0" styleClass="blue-panel" stylesheets="@../../../css/Styleheet.css">
+         <children>
+            <Label text="Sign Up" textFill="#2693f3">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="userName" promptText="User  Name" styleClass="tf_box" stylesheets="@../../../css/Styleheet.css" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
                         <Insets left="15.0" right="10.0" top="15.0" />
-                    </HBox.margin>
-                </TextField>
-            </children>
-        </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-            <children>
-                <TextField fx:id="firstName" prefHeight="27.0" prefWidth="217.0" promptText="First Name" styleClass="tf_box" HBox.hgrow="ALWAYS">
-                    <HBox.margin>
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="firstName" prefHeight="27.0" prefWidth="217.0" promptText="First Name" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
                         <Insets left="15.0" right="10.0" top="15.0" />
-                    </HBox.margin>
-                </TextField>
-            <TextField fx:id="lastname" prefHeight="27.0" prefWidth="217.0" promptText="Last Name" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
-            </children>
-        </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <TextField fx:id="email" promptText="Email" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="phoneNumber" promptText="Phone Number" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="lastname" prefHeight="27.0" prefWidth="217.0" promptText="Last Name" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="email" promptText="Email" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="phoneNumber" promptText="Phone Number" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="password" promptText="Password" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="repeatPassword" promptText="Repeat Password" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <ChoiceBox fx:id="country" prefWidth="216.0" styleClass="tf_box_country_sign_up" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </ChoiceBox>
+                  <TextField fx:id="birthdate" promptText="Birth Date : YYYY/MM/DD" styleClass="tf_box" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="10.0" top="15.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#CreateSignUp" prefHeight="40.0" prefWidth="458.0" styleClass="blue-btn" text="Sign Up">
+               <font>
+                  <Font name="System Font" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" top="20.0" />
+               </VBox.margin>
+            </Button>
          </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <TextField fx:id="password" promptText="Password" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
-            <TextField fx:id="repeatPassword" promptText="Repeat Password" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="200.0">
-         <children>
-            <ChoiceBox fx:id="country" prefWidth="216.0" styleClass="tf_box_country_sign_up" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </ChoiceBox>
-            <TextField fx:id="birthdate" promptText="Birth Date : YYYY/MM/DD" styleClass="tf_box" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="15.0" right="10.0" top="15.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
-      <Button mnemonicParsing="false" onAction="#CreateSignUp" prefHeight="40.0" prefWidth="458.0" styleClass="blue-btn" text="Sign Up">
-         <font>
-            <Font name="System Font" size="20.0" />
-         </font>
-         <VBox.margin>
-            <Insets left="15.0" right="15.0" top="20.0" />
-         </VBox.margin>
-      </Button>
-      <Label fx:id="lableAnwser" alignment="CENTER" prefHeight="40.0" prefWidth="450.0" textAlignment="CENTER" textFill="#b91b1b" VBox.vgrow="ALWAYS">
-         <VBox.margin>
-            <Insets left="15.0" right="15.0" top="15.0" />
-         </VBox.margin>
-      </Label>
-    </children>
-</VBox>
+      </VBox>
+      <GridPane fx:id="gridPane" alignment="CENTER" layoutX="90.0" layoutY="40.0" prefHeight="400.0" prefWidth="300.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</Pane>

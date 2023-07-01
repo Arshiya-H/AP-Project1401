@@ -17,6 +17,7 @@ public class Server {
         this.ServerSocket = ServerSocket;
     }
 
+
     public static void main(String[] args) throws IOException {
         DBManager.creatUsersTable();
         DBManager.creatFollowingTable();

@@ -14,10 +14,12 @@ public class testApp extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-//        scene.setFill(Color.TRANSPARENT);
+        stage.setMinWidth(980);
+        stage.setMinHeight(680);
+        //        scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Hello!");
         stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
     }
 

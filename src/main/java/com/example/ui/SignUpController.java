@@ -1,19 +1,26 @@
 package com.example.ui;
 
 import UserApplicationSrarter.UserController;
-import Inheritance.ObjectStream;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,9 +29,7 @@ import java.util.ResourceBundle;
 import static UserApplicationSrarter.ORDER.InsertUser;
 import static com.example.ui.HelloApplication.stream;
 
-
 public class SignUpController implements Initializable {
-
 
     private String[] CountryList = {"Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua & Deps", "Argentina",
             "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium",
@@ -61,9 +66,6 @@ public class SignUpController implements Initializable {
     private TextField firstName;
 
     @FXML
-    private Label lableAnwser;
-
-    @FXML
     private TextField lastname;
 
     @FXML
@@ -78,55 +80,85 @@ public class SignUpController implements Initializable {
     @FXML
     private TextField userName;
 
-
-    private Stage stage;
+    @FXML
+    private GridPane gridPane;
 
     @FXML
-    void BackToStartApp(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("StartApp.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
+    private Parent fxml;
+    private final static   Duration start_finish= Duration.seconds(0.25);
+
 
     @FXML
     void CreateSignUp(ActionEvent event) throws IOException {
-        lableAnwser.setText("");
         String awnser = UserController.singUp(stream, userName.getText(), phoneNumber.getText(), email.getText(), password.getText(), repeatPassword.getText());
         if (!awnser.equals("true")) {
-            lableAnwser.setText("! " + awnser + " !");
+            animationMassage(awnser, false);
             return;
         }
         if (firstName.getText().equals("")) {
-            lableAnwser.setText("First Name must not be empty");
+            animationMassage("First Name must not be empty", false);
             return;
         }
         if (lastname.getText().equals("")) {
-            lableAnwser.setText("Last Name must not be empty");
+            animationMassage("Last Name must not be empty", false);
             return;
         }
         if (country.getValue().equals("CHOOSE A COUNTRY")) {
-            lableAnwser.setText("you must choose a country");
+            animationMassage("you must choose a country", false);
             return;
         }
         if (birthdate.getText().equals("")) {
-            lableAnwser.setText("Birth Date must not be empty");
+            animationMassage("Birth Date must not be empty", false);
             return;
         }
         stream.WRITE(InsertUser + "");
         stream.WRITE(userName.getText() + "//" + firstName.getText() + "//" + lastname.getText() + "//" + email.getText() + "//" + phoneNumber.getText() + "//" + password.getText() + "//" + country.getValue() + "//" + birthdate.getText());
 
-        lableAnwser.setText("# accept #");
-
+        animationMassage("Thank you!\nYour account has been successfully complete.", true);
 
     }
 
+    public void animationMassage(String text, boolean result) {
+        FXMLLoader massage = new FXMLLoader(startController.class.getResource("massageAcceptRefuse.fxml"));
+        try {
+            fxml = massage.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        massageAcceptRefuseController controller = massage.getController();
+        controller.setInformation(text, result);
+        gridPane.setTranslateX(gridPane.getPrefWidth() * -0.125);
+        gridPane.setOpacity(0);
+        gridPane.getChildren().add(fxml);
+
+        Timeline start = new Timeline(
+                new KeyFrame(start_finish, new KeyValue(gridPane.translateXProperty(), 0)),
+                new KeyFrame(start_finish, new KeyValue(gridPane.opacityProperty(), 1))
+        );
+        Timeline freeze = new Timeline(new KeyFrame(Duration.seconds(0.75)));
+        Timeline finish = new Timeline(
+                new KeyFrame(start_finish, new KeyValue(gridPane.translateXProperty(), gridPane.getPrefWidth() * 0.125)),
+                new KeyFrame(start_finish, new KeyValue(gridPane.opacityProperty(), 0))
+        );
+        start.play();
+        start.setOnFinished((a) -> freeze.play());
+        freeze.setOnFinished((a) -> finish.play());
+        finish.setOnFinished((a) -> {
+            gridPane.getChildren().remove(fxml);
+            new Timeline(
+                    new KeyFrame(Duration.millis(1), new KeyValue(gridPane.translateXProperty(),
+                            gridPane.getPrefWidth() * 2))).play();
+        });
+        gridPane.setTranslateX(480);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        gridPane.setTranslateX(-480);
         country.setValue("CHOOSE A COUNTRY");
         country.getItems().addAll(CountryList);
+
     }
 
 
