@@ -31,7 +31,9 @@ public class Tweet implements Serializable {
     }
 
 
-
+    public int getTweetId() {
+        return tweetId;
+    }
     public String getText() {
         return text;
     }

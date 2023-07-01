@@ -323,6 +323,121 @@ public class DBManager {
         }
         return null;
     }
+    //------------------------------------------------------------------------------------
+    // Search things:
+    /**
+     * this method search by username or full name
+     * you should write in one of these two patterns:
+     * "UserName" or "first_name last_name"
+     * */
+    public static ArrayList<User> searchUser(String input) {
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        String[] splitInput = input.split(" ");
+        int cnt = splitInput.length;
+        PreparedStatement statement = null;
+        try {
+            // search fo username:
+            if (cnt == 1) {
+                // search fo username
+                statement = connection.prepareStatement("SELECT * FROM Users WHERE userName = ?");
+                statement.setString(1, splitInput[0]);
+            }
+            // search for full name:
+            else if (cnt == 2) {
+                // search for first and last names
+                statement = connection.prepareStatement("SELECT * FROM Users WHERE firstName = ? AND lastName = ?");
+                statement.setString(1, splitInput[0]);
+                statement.setString(2, splitInput[1]);
+            }
+
+            ResultSet rs = statement.executeQuery();
+
+            if (!rs.isBeforeFirst()) {
+                System.out.println("No Result!");
+                return null;
+            }
+
+            ArrayList<User> users = new ArrayList<>();
+            while (rs.next()){
+                User tempUser = new User();
+                tempUser.setUserName(rs.getString("userName"));
+                tempUser.setFirstName(rs.getString("firstName"));
+                tempUser.setLastName(rs.getString("lastName"));
+                tempUser.setEmail(rs.getString("email"));
+                tempUser.setPhoneNumber(rs.getString("phoneNumber"));
+                tempUser.setPassword(rs.getString("password"));
+                tempUser.setCountry(rs.getString("country"));
+                tempUser.setBirthDate(rs.getString("birthDate"));
+                tempUser.setInComeDate(rs.getString("inComeDate"));
+                tempUser.setLastChangeDate(rs.getString("lastChangeDate"));
+                tempUser.setBio(rs.getString("bio"));
+                tempUser.setLocation(rs.getString("location"));
+                tempUser.setWebAddress(rs.getString("webAddress"));
+                tempUser.setJWT(rs.getString("JWT"));
+                tempUser.setAvatar(rs.getBytes("avatar"));
+                tempUser.setHeader(rs.getBytes("header"));
+                users.add(tempUser);
+            }
+            return users;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    /**
+     * this method search by given hashtag
+     * you should write in this pattern:
+     * "#your_hashtag"
+     * */
+    public static ArrayList<Tweet> searchHashtags(String hashtag){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+
+            String query = "SELECT * FROM Tweets WHERE hashtag LIKE ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, "%" + hashtag + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ArrayList<Tweet> foundTweets = new ArrayList<>();
+            while (resultSet.next()) {
+                Tweet tempTweet = new Tweet();
+                tempTweet.setTweetId(resultSet.getInt("id"));
+                tempTweet.setLikeNumber(resultSet.getInt("likeNumber"));
+                tempTweet.setReTweetNumber(resultSet.getInt("reTweetNumber"));
+                tempTweet.setReplyNumber(resultSet.getInt("replyNumber"));
+                tempTweet.setParentTweetId(resultSet.getInt("parentTweetId"));
+                tempTweet.setImage(resultSet.getBytes("image"));
+                tempTweet.setVideo(resultSet.getBytes("video"));
+                tempTweet.setText(resultSet.getString("text"));
+                tempTweet.setSendingDate(resultSet.getString("sendingDate"));
+                tempTweet.setSendingTime(resultSet.getString("sendingTime"));
+                tempTweet.setTweetOwnerUsername(resultSet.getString("tweetOwnerUsername"));
+                tempTweet.setTweetType(resultSet.getString("tweetType"));
+                tempTweet.setHashtag(resultSet.getString("hashtag"));
+                foundTweets.add(tempTweet);
+            }
+            return foundTweets;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
 
 
     //------------------------------------------------------------------------------------
@@ -568,69 +683,4 @@ public class DBManager {
         }
     }
 
-    //------------------------------------------------------------------------------------
-    /**
-     * this method search by username or full name
-     * you should write in of these tho paterns:
-     * "UserName" or "first_name last_name"
-     * */
-    public static ArrayList<User> searchUser(String input) {
-        DBConnection dbConnection = new DBConnection();
-        Connection connection = dbConnection.getConnection();
-
-        String[] splitInput = input.split(" ");
-        int cnt = splitInput.length;
-        PreparedStatement statement = null;
-        try {
-            if (cnt == 1) {
-                // search fo username
-                statement = connection.prepareStatement("SELECT * FROM Users WHERE userName = ?");
-                statement.setString(1, splitInput[0]);
-            } else if (cnt == 2) {
-                // search for first and last names
-                statement = connection.prepareStatement("SELECT * FROM Users WHERE firstName = ? AND lastName = ?");
-                statement.setString(1, splitInput[0]);
-                statement.setString(2, splitInput[1]);
-            }
-
-            ResultSet rs = statement.executeQuery();
-
-            if (!rs.isBeforeFirst()) {
-                System.out.println("Invalid search!");
-                return null;
-            }
-
-            ArrayList<User> users = new ArrayList<>();
-            while (rs.next()){
-                User tempUser = new User();
-                tempUser.setUserName(rs.getString("userName"));
-                tempUser.setFirstName(rs.getString("firstName"));
-                tempUser.setLastName(rs.getString("lastName"));
-                tempUser.setEmail(rs.getString("email"));
-                tempUser.setPhoneNumber(rs.getString("phoneNumber"));
-                tempUser.setPassword(rs.getString("password"));
-                tempUser.setCountry(rs.getString("country"));
-                tempUser.setBirthDate(rs.getString("birthDate"));
-                tempUser.setInComeDate(rs.getString("inComeDate"));
-                tempUser.setLastChangeDate(rs.getString("lastChangeDate"));
-                tempUser.setBio(rs.getString("bio"));
-                tempUser.setLocation(rs.getString("location"));
-                tempUser.setWebAddress(rs.getString("webAddress"));
-                tempUser.setJWT(rs.getString("JWT"));
-                tempUser.setAvatar(rs.getBytes("avatar"));
-                tempUser.setHeader(rs.getBytes("header"));
-                users.add(tempUser);
-            }
-            return users;
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
 }

@@ -46,6 +46,7 @@ public class ConnectionApp implements Runnable {
                 case CreateTweet -> insertTweet(serverObjectStream.readTweet());
                 case RefreshTweets -> refreshTweets();
                 case SearchUser -> searchUser(serverObjectStream.READ());
+                case SearchHashtags -> searchHashtags(serverObjectStream.READ());
 
 
                 case UpdatePhoneNumber ->
@@ -247,9 +248,13 @@ public class ConnectionApp implements Runnable {
         serverObjectStream.writeTweetsList(allTweets);
     }
     //-----------------------------------------------------------------------------------------
-    // Search User:
+    // Search things:
     public void searchUser(String input){
         ArrayList<User> users = DBManager.searchUser(input);
         serverObjectStream.writeUsersList(users);
+    }
+    public void searchHashtags(String hashtag){
+        ArrayList<Tweet> foundTweets = DBManager.searchHashtags(hashtag);
+        serverObjectStream.writeTweetsList(foundTweets);
     }
 }
