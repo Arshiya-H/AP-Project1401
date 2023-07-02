@@ -6,44 +6,57 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" prefHeight="680.0" prefWidth="700.0" styleClass="blue-panel" stylesheets="@../../../css/Styleheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.ui.tweetController">
    <children>
-      <GridPane prefHeight="621.0" prefWidth="700.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="300.0" vgrow="ALWAYS" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
-        </rowConstraints>
+      <Pane prefHeight="680.0" prefWidth="700.0" VBox.vgrow="ALWAYS">
          <children>
-            <TextField fx:id="imageAddress" prefHeight="40.0" promptText="Addres of image" styleClass="Hbox-search" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="30.0" left="80.0" right="80.0" top="30.0" />
-               </GridPane.margin>
-            </TextField>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendTweet" prefHeight="64.0" prefWidth="175.0" styleClass="blue-btn-search" text="Send" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <GridPane.margin>
-                  <Insets bottom="20.0" right="20.0" />
-               </GridPane.margin>
-            </Button>
-            <TextArea fx:id="text" prefHeight="180.0" prefWidth="640.0" promptText="Text" style="-fx-background-color: #034680;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-               <font>
-                  <Font size="20.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets bottom="30.0" left="30.0" right="30.0" top="80.0" />
-               </GridPane.margin>
-            </TextArea>
+            <GridPane prefHeight="621.0" prefWidth="700.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="300.0" vgrow="ALWAYS" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <TextField fx:id="imageAddress" prefHeight="40.0" promptText="Addres of image" styleClass="Hbox-search" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="30.0" left="80.0" right="80.0" top="30.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendTweet" prefHeight="64.0" prefWidth="175.0" styleClass="blue-btn-search" text="Send" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="20.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <TextArea fx:id="text" prefHeight="180.0" prefWidth="640.0" promptText="Text" style="-fx-background-color: #034680;" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="80.0" />
+                     </GridPane.margin>
+                  </TextArea>
+               </children>
+            </GridPane>
+            <GridPane fx:id="gridPane" layoutX="200.0" layoutY="140.0" prefHeight="400.0" prefWidth="300.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
          </children>
-      </GridPane>
+      </Pane>
    </children>
 </VBox>

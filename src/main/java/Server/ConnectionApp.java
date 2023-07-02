@@ -47,9 +47,9 @@ public class ConnectionApp implements Runnable {
                 case RefreshTweets -> refreshTweets();
                 case SearchUser -> searchUser(serverObjectStream.READ());
                 case SearchHashtags -> searchHashtags(serverObjectStream.READ());
-
+                case HashtagsStatics -> hashtagsStatics(serverObjectStream.READ());
                 case EditProfile -> EditProfile();
-
+                case GetUserName -> serverObjectStream.WRITE(userName);
                 case LOGIUT -> DBManager.updateSecretKeyAndJWT(serverObjectStream.READ(), null, null);
             }
         }
@@ -66,6 +66,12 @@ public class ConnectionApp implements Runnable {
 
     }
 
+    public void hashtagsStatics(String wantedHashtag) {
+        ArrayList<Tweet> wantedTweets = DBManager.searchHashtags(wantedHashtag);
+        ArrayList<Tweet> allTweets = DBManager.getAllTweets();
+        serverObjectStream.writeTweetsList(wantedTweets);
+        serverObjectStream.writeTweetsList(allTweets);
+    }
 
     public void AcceptSingIn() {
         String secertyKey;
