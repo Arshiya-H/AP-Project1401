@@ -105,7 +105,7 @@ public class mainController implements Initializable {
         try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource(name));
             Parent root = fxml.load();
-            ((userAccountController) fxml.getController()).srtInformation(user);
+            ((accountController) fxml.getController()).setInformation(user);
             if (VboxScreen.getChildren().size() != 0) {
                 Node old = VboxScreen.getChildren().get(0);
                 VboxScreen.getChildren().remove(old);

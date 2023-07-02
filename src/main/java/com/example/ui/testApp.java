@@ -17,9 +17,9 @@ public class testApp extends Application {
     public void start(Stage stage) throws IOException {
         socket = new Socket("localhost", 2000);
         stream = new ObjectStream(socket);
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hashtagStatics.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setMinWidth(980);
+        stage.setMinWidth(700);
         stage.setMinHeight(680);
         //        scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Hello!");
