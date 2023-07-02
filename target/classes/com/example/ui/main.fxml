@@ -130,7 +130,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#HashtagStatisticsBTN1" prefHeight="30.0" prefWidth="220.0" styleClass="menu-btn" text="Hashtag Statistic" textFill="WHITE">
+                  <Button alignment="TOP_CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#HashtagStatisticsBTN" prefHeight="30.0" prefWidth="220.0" styleClass="menu-btn" text="Hashtag Statistic" textFill="WHITE">
                      <font>
                         <Font size="18.0" />
                      </font>

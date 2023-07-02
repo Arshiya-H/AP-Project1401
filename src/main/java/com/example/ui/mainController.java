@@ -1,5 +1,6 @@
 package com.example.ui;
 
+import Client.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,8 +60,8 @@ public class mainController implements Initializable {
     }
 
     @FXML
-    void HashtagStatisticsBTN1(ActionEvent event) {
-
+    void HashtagStatisticsBTN(ActionEvent event) {
+        load("hashtagStatics.fxml");
     }
 
     @FXML
@@ -98,6 +99,23 @@ public class mainController implements Initializable {
 
     }
 
+    public void showAccount(String name, User user) {
+        if (name.equals(oldPage)) return;
+        oldPage = name;
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource(name));
+            Parent root = fxml.load();
+            ((userAccountController) fxml.getController()).srtInformation(user);
+            if (VboxScreen.getChildren().size() != 0) {
+                Node old = VboxScreen.getChildren().get(0);
+                VboxScreen.getChildren().remove(old);
+            }
+            VboxScreen.getChildren().add(root);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         rectangleHeader.setArcWidth(100);
@@ -110,8 +128,6 @@ public class mainController implements Initializable {
         Image avatar = new Image("/pngwing.com.png", false);
         CircleAvatar.setFill(new ImagePattern(avatar));
         CircleAvatar.setEffect(new DropShadow(5, Color.BLACK));
-
-        load("home.fxml");
     }
 
     public void load(String name) {

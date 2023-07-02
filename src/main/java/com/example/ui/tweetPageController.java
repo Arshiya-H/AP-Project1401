@@ -14,28 +14,22 @@ public class tweetPageController implements Initializable {
 
     @FXML
     private Circle circleIProfile;
-
-    @FXML
-    private Label date;
-
-    @FXML
-    private Label fullName;
-
     @FXML
     private Button like;
-
     @FXML
     private Label likesRetweet;
-
     @FXML
     private Button qute;
-
     @FXML
     private Button retweet;
 
+
     @FXML
     private Label text;
-
+    @FXML
+    private Label date;
+    @FXML
+    private Label fullName;
     @FXML
     private Label userName;
 
@@ -52,6 +46,13 @@ public class tweetPageController implements Initializable {
     @FXML
     void retweet(ActionEvent event) {
 
+    }
+
+    public void getInformation(String text, String date, String fullName, String userName) {
+        this.text.setText(text);
+        this.date.setText(date);
+        this.fullName.setText(fullName);
+        this.userName.setText(userName);
     }
 
     @Override

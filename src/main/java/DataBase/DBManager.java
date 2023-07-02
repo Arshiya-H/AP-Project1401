@@ -307,6 +307,7 @@ public class DBManager {
                 tempTweet.setSendingDate(resultSet.getString("sendingDate"));
                 tempTweet.setSendingTime(resultSet.getString("sendingTime"));
                 tempTweet.setTweetOwnerUsername(resultSet.getString("tweetOwnerUsername"));
+                tempTweet.setTweetOwnerFullName(DBManager.returnFullName(resultSet.getString("tweetOwnerUsername")));
                 tempTweet.setTweetType(resultSet.getString("tweetType"));
                 tempTweet.setHashtag(resultSet.getString("hashtag"));
                 allTweets.add(tempTweet);
@@ -440,6 +441,33 @@ public class DBManager {
                 ex.printStackTrace();
             }
         }
+    }
+
+    public static String returnFullName(String userName){
+        DBConnection dbConnection = new DBConnection();
+        Connection connection = dbConnection.getConnection();
+
+        try {
+            PreparedStatement pstmt = connection.prepareStatement("SELECT firstName, lastName FROM Users WHERE userName = ?");
+            pstmt.setString(1, userName);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                return firstName.concat(" "+lastName);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return null;
     }
 
 

@@ -35,7 +35,7 @@
       </HBox>
       <ScrollPane fx:id="scroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="630.0" prefWidth="714.0" styleClass="blue-panel" stylesheets="@../../../css/Styleheet.css" VBox.vgrow="ALWAYS">
          <content>
-            <VBox fx:id="BoxTweet" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="614.0" prefWidth="800.0" />
+            <VBox fx:id="BoxUser" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="614.0" prefWidth="800.0" />
          </content>
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
